@@ -32,6 +32,15 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
         <link rel="icon" href="/favicon.ico" />
+
+        {/* Google AdSense — injected globally when clientId is set */}
+        {siteConfig.ads.clientId && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.ads.clientId}`}
+            crossOrigin="anonymous"
+          />
+        )}
       </head>
       <body className="font-body text-text-dark antialiased">
         <Header />

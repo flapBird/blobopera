@@ -1,5 +1,6 @@
 /**
  * Site configuration — the single source of truth for the entire game site.
+ * Sensitive values (gaId, adsense) are read from environment variables.
  * When creating a new game site, only edit this file and replace images in /public.
  */
 export const siteConfig = {
@@ -78,16 +79,15 @@ export const siteConfig = {
   },
 
   ads: {
-    /**
-     * Keep false until AdSense is approved and real ad code is added.
-     * When true, sidebar and rectangle ad slots appear on the page.
-     */
-    enabled: false,
+    /** Google AdSense client ID, e.g. ca-pub-xxxxxxxxxxxxxx. Set via NEXT_PUBLIC_ADSENSE_CLIENT_ID. */
+    clientId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "",
+    /** When true, sidebar and rectangle ad slots appear on the page. */
+    enabled: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID ? true : false,
   },
 
   analytics: {
-    /** Google Analytics 4 measurement ID, e.g. G-XXXXXXXX. Leave empty to skip GA. */
-    gaId: "G-MBLF3HHVNQ",
+    /** Google Analytics 4 measurement ID, e.g. G-XXXXXXXX. Set via NEXT_PUBLIC_GA_ID. */
+    gaId: process.env.NEXT_PUBLIC_GA_ID || "",
     /** Google Search Console verification code. Leave empty to skip. */
     gscVerification: "",
   },
