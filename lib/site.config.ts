@@ -81,8 +81,8 @@ export const siteConfig = {
   ads: {
     /** Google AdSense client ID, e.g. ca-pub-xxxxxxxxxxxxxx. Set via NEXT_PUBLIC_ADSENSE_CLIENT_ID. */
     clientId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "",
-    /** When true, sidebar and rectangle ad slots appear on the page. */
-    enabled: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID ? true : false,
+    /** Keep false to only load the head script without displaying ad units on the page. */
+    enabled: false,
   },
 
   analytics: {
