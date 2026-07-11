@@ -19,7 +19,7 @@ export const siteConfig = {
      * Describe what the game is and that it's free to play online.
      */
     description:
-      "Create your own opera music with adorable singing blobs. Drag, stretch, and conduct four blob voices to compose beautiful harmonies. Free to play, no download needed.",
+      "Play Blob Opera online free. Drag adorable singing blobs to create beautiful harmonies in your browser. No download or sign-up needed.",
 
     /** Comma-separated keywords for the homepage. */
     keywords: ["blob opera", "opera game", "music game", "singing blobs", "online music maker", "google arts and culture", "music creation", "free music game"],

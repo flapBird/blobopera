@@ -18,8 +18,12 @@ const GAME_SECTIONS = [
     body: "Your opera company is made up of four charming blob singers: a deep rumbling Bass, a warm mid-range Tenor, a bright Mezzo-Soprano, and an angelic high Soprano. Each blob has its own personality and vocal color. Together they harmonize automatically, so even a single drag produces rich, layered chords. Whether you want soaring arias or gentle lullabies, the blobs follow your lead with character and charm.",
   },
   {
-    heading: "The Magic Behind the Blobs",
-    body: "What makes Blob Opera genuinely special is the technology humming under the hood. Google trained a machine learning model on hours of recordings by real opera singers — bass, tenor, mezzo-soprano, and soprano — teaching it the nuances of vibrato, phrasing, and vowel shaping. When you drag a blob, you are not triggering a pre-recorded sample; you are playing an AI instrument that understands how a real voice behaves. The result is a free online music game that feels alive, responsive, and endlessly surprising. It is as much a music creation tool as it is a game — and perhaps the most joyful demonstration of what creative AI can do.",
+    heading: "How the Blobs Learn to Sing",
+    body: "The voices you hear from the blobs are not pre-recorded audio clips. They are generated live by an AI that was trained on real opera singers. Google invited four professional singers — a bass, a tenor, a mezzo-soprano, and a soprano — to record about 16 hours of singing material. They sang at different pitches, with different vowel shapes, and in different styles. This taught the AI how a real voice behaves: how vibrato works, how notes slide between pitches, and how vowels change the sound.",
+  },
+  {
+    heading: "AI Harmony Engine",
+    body: "When you drag one blob to play a melody, the other three automatically harmonize with it. Google built a separate AI model specifically for this: it listens to the note you are playing and decides what the other three voices should sing to create a pleasant four-part harmony. This is why you do not need any music knowledge to make something that sounds good. Between the real-voice training data and the harmony engine, Blob Opera feels less like a toy and more like a genuinely expressive musical instrument.",
   },
 ];
 
@@ -111,6 +115,16 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+          </div>
+
+          {/* How to Play screenshot */}
+          <ImagePlaceholder
+            src="/blob-desc-2.webp"
+            alt="Blob Opera controls — dragging a blob to change pitch and vowel sound"
+            caption="Drag up and down to change pitch, left and right to shape the vowel."
+          />
+
+          <div>
             <p className="text-text-dark/70 leading-relaxed mt-4">
               All four blobs harmonize automatically. Play them together for rich
               chords or focus on just one for a solo melody. Hit the record button
@@ -118,11 +132,69 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* Image placeholder between how-to-play and magic */}
+          {/* Record & Replay feature */}
+          <div>
+            <h2 className="font-heading font-bold text-2xl text-text-dark mb-3">
+              Record & Replay Your Performance
+            </h2>
+            <p className="text-text-dark/70 leading-relaxed mb-4">
+              Want to save what you have created? There is a red record button at
+              the bottom left of the game screen. Tap it and the blobs start
+              listening — every drag, every pitch change, every vowel shift gets
+              captured as you play.
+            </p>
+            <p className="text-text-dark/70 leading-relaxed mb-4">
+              Once you finish, hit stop and you can play back the entire recording
+              right away. The blobs will replay your performance note for note,
+              exactly the way you conducted them. It is surprisingly satisfying
+              to sit back and watch the blobs perform the song you just made.
+            </p>
+            <p className="text-text-dark/70 leading-relaxed">
+              You can also share your recording with friends by getting a unique
+              link — no account or sign-up required. Just record, share, and
+              let others hear what you created.
+            </p>
+          </div>
+
+          {/* Record button screenshot placeholder */}
           <ImagePlaceholder
-            src="/blob-desc-2.webp"
-            maxWidth={700}
-            alt="Close-up of dragging a blob to change pitch, demonstrating the game controls"
+            src="/blob-desc-3.webp"
+            alt="Record button at the bottom left of the Blob Opera game screen"
+            caption="Tap the red record button, play your song, then replay it note for note."
+          />
+
+          {/* City themes and preset songs feature */}
+          <div>
+            <h2 className="font-heading font-bold text-2xl text-text-dark mb-3">
+              City Themes & Preset Songs
+            </h2>
+            <p className="text-text-dark/70 leading-relaxed mb-4">
+              Blob Opera is not just one stage — it takes you around the world. 
+              There is a button at the bottom right of the game screen that lets you 
+              switch between different cities, like London, New York, and Sydney. 
+              Each city has its own unique backdrop, so the blobs get a fresh look 
+              every time you switch.
+            </p>
+            <p className="text-text-dark/70 leading-relaxed mb-4">
+              The music changes too. On the left side of the screen, there is a 
+              playlist of preset songs that match the city you have selected. 
+              You can pick a song from the list and let the blobs sing it for you, 
+              or use it as a starting point and take over by dragging them to add 
+              your own twist. It is a great way to explore different musical styles 
+              without having to compose from scratch.
+            </p>
+            <p className="text-text-dark/70 leading-relaxed">
+              Whether you want the blobs to perform a classical piece under the 
+              London skyline or something more playful with a New York backdrop, 
+              the city themes make the experience feel fresh every time.
+            </p>
+          </div>
+
+          {/* City themes screenshot placeholder */}
+          <ImagePlaceholder
+            src="/blob-desc-4.webp"
+            alt="Blob Opera city theme switcher — London, New York, and Sydney backdrops"
+            caption="Switch between city themes to change the stage background and available songs."
           />
 
           {GAME_SECTIONS.slice(2).map((section, i) => (
@@ -135,6 +207,14 @@ export default function HomePage() {
               </p>
             </div>
           ))}
+
+          {/* Image placeholder between how-to-play and magic */}
+          <ImagePlaceholder
+            src="/blob-desc-5.webp"
+            maxWidth={700}
+            alt=""
+          />
+
 
           {/* FAQ section */}
           <div>
