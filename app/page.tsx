@@ -19,11 +19,19 @@ const GAME_SECTIONS = [
   },
   {
     heading: "How the Blobs Learn to Sing",
-    body: "The voices you hear from the blobs are not pre-recorded audio clips. They are generated live by an AI that was trained on real opera singers. Google invited four professional singers — a bass, a tenor, a mezzo-soprano, and a soprano — to record about 16 hours of singing material. They sang at different pitches, with different vowel shapes, and in different styles. This taught the AI how a real voice behaves: how vibrato works, how notes slide between pitches, and how vowels change the sound.",
+    body: "The voices you hear from the blobs are not pre-recorded audio clips. They are generated live by an AI that was trained on real opera singers. Google invited four professional singers — a bass, a tenor, a mezzo-soprano, and a soprano — to record about 16 hours of singing material. They sang at different pitches, with different vowel shapes, and in different styles. This taught the AI how a real voice behaves: how vibrato works, how notes slide between pitches, and how vowels like ‘oo’ and ‘ah’ change the timbre and color of a sound.",
   },
   {
     heading: "AI Harmony Engine",
-    body: "When you drag one blob to play a melody, the other three automatically harmonize with it. Google built a separate AI model specifically for this: it listens to the note you are playing and decides what the other three voices should sing to create a pleasant four-part harmony. This is why you do not need any music knowledge to make something that sounds good. Between the real-voice training data and the harmony engine, Blob Opera feels less like a toy and more like a genuinely expressive musical instrument.",
+    body: "When you drag one blob to play a melody, the other three automatically harmonize with it. Google built a separate AI model specifically for this: it listens to the note you are playing and computes what the other three voices should sing to create a pleasant four-part harmony in real time. The harmony engine understands music theory concepts like chord progressions and voice leading, so the result sounds natural — as if a real vocal quartet was following your lead. This is why you do not need any music knowledge to make something that sounds good. Whether you drag gently for a soft melody or move quickly for dramatic effects, the AI adjusts instantly to keep the harmony balanced.",
+  },
+  {
+    heading: "Why It Sounds So Natural",
+    body: "Blob Opera stands out because the AI model was trained on actual voice data rather than synthetic samples. Each of the four singers recorded hours of material covering their full vocal range, including smooth transitions between notes (portamento), different levels of vibrato, and various articulation styles. The model learned to mimic these expressive techniques rather than simply stitching together recorded fragments. When you drag a blob quickly, you hear a natural vocal slide instead of an abrupt pitch jump. When you hold a note, you hear subtle variations in tone rather than a static sound. Combined with the automatic harmony engine, every performance feels alive and uniquely yours.",
+  },
+  {
+    heading: "Blob Opera Is for Everyone",
+    body: "Blob Opera was designed to remove every barrier between you and making music. There is no login screen, no tutorial to sit through, and no wrong notes. You can start playing the moment the page loads, and the blobs will always sound musical because the AI handles the hard parts. Teachers use Blob Opera in classrooms to introduce students to vocal ranges and harmony. Parents enjoy it with young children who love watching the colorful blobs respond to their touch. Even professional musicians sometimes use it as a quick sketching tool for vocal arrangements. It is a rare thing — a piece of technology that is both deeply sophisticated and genuinely joyful to use.",
   },
 ];
 
