@@ -38,8 +38,8 @@ const GAME_SECTIONS = [
 const HOW_TO_PLAY_STEPS = [
   ["Drag up", "Raises the pitch. The higher you drag, the higher the note. Each blob has its own comfortable vocal range — from deep bass to soaring soprano."],
   ["Drag down", "Lowers the pitch. The further down you go, the deeper the note. Slide smoothly between low and high, just like a real voice."],
-  ["Drag left", "Shapes the vowel toward 'oo'. The sound becomes rounder, softer, and more mellow."],
-  ["Drag right", "Shapes the vowel toward 'ah'. The sound opens up, becoming brighter and more operatic."],
+  ["Drag left", "Shapes the vowel toward 'ah'. The sound opens up, becoming brighter and more operatic."],
+  ["Drag right", "Shapes the vowel toward 'oo'. The sound becomes rounder, softer, and more mellow."],
 ];
 
 const FAQ_ITEMS = [
