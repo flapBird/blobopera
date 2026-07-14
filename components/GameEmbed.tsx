@@ -8,7 +8,6 @@ export default function GameEmbed() {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [likes, setLikes] = useState<"idle" | "liked" | "disliked">("idle");
 
-  // Load existing vote from localStorage
   const [persistedVote, setPersistedVote] = useState<"liked" | "disliked" | null>(() => {
     if (typeof window === "undefined") return null;
     const v = localStorage.getItem("blob_opera_vote");
@@ -21,7 +20,7 @@ export default function GameEmbed() {
 
   const handleVote = useCallback((type: "liked" | "disliked") => {
     const existing = localStorage.getItem("blob_opera_vote");
-    if (existing === "liked" || existing === "disliked") return; // already voted
+    if (existing === "liked" || existing === "disliked") return;
     localStorage.setItem("blob_opera_vote", type);
     setLikes(type);
     setPersistedVote(type);
@@ -45,16 +44,16 @@ export default function GameEmbed() {
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      {/* Game container — fullscreen wraps this */}
+      {/* Game container */}
       <div
         ref={containerRef}
         className="relative w-full rounded-xl overflow-hidden shadow-lg bg-gray-100"
-        style={{ aspectRatio: siteConfig.game.aspectRatio }}
       >
         <iframe
           ref={iframeRef}
           src={siteConfig.game.embedUrl}
-          className="absolute inset-0 w-full h-full"
+          className="w-full"
+          style={{ aspectRatio: siteConfig.game.aspectRatio, minHeight: "480px" }}
           allow="autoplay; fullscreen"
           sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
           title={siteConfig.game.name}
@@ -63,7 +62,6 @@ export default function GameEmbed() {
 
       {/* Toolbar */}
       <div className="flex items-center justify-end gap-1 mt-2 text-text-dark/50">
-        {/* Thumb up */}
         <button
           onClick={() => handleVote("liked")}
           disabled={persistedVote !== null}
@@ -79,7 +77,6 @@ export default function GameEmbed() {
           </svg>
         </button>
 
-        {/* Thumb down */}
         <button
           onClick={() => handleVote("disliked")}
           disabled={persistedVote !== null}
@@ -95,10 +92,8 @@ export default function GameEmbed() {
           </svg>
         </button>
 
-        {/* Separator */}
         <span className="w-px h-5 bg-gray-200 mx-1" />
 
-        {/* Reload */}
         <button
           onClick={handleReload}
           className="p-2 rounded-lg hover:bg-gray-100 hover:text-text-dark transition-colors"
@@ -110,7 +105,6 @@ export default function GameEmbed() {
           </svg>
         </button>
 
-        {/* Fullscreen */}
         <button
           onClick={handleFullscreen}
           className="p-2 rounded-lg hover:bg-gray-100 hover:text-text-dark transition-colors"
