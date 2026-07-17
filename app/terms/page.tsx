@@ -1,3 +1,4 @@
+import EmailLink from "@/components/EmailLink";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site.config";
 import LegalPage from "@/components/LegalPage";
@@ -125,12 +126,9 @@ export default function TermsPage() {
         <p>
           For questions about these Terms &amp; Conditions, please contact
           us at{" "}
-          <a
-            href={`mailto:${siteConfig.contact.email}`}
-            className="text-primary underline"
-          >
+          <EmailLink email={siteConfig.contact.email} className="text-primary underline">
             {siteConfig.contact.email}
-          </a>
+          </EmailLink>
           .
         </p>
       </section>

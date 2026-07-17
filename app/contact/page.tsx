@@ -1,3 +1,4 @@
+import EmailLink from "@/components/EmailLink";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site.config";
 
@@ -38,12 +39,9 @@ export default function ContactPage() {
         <p className="text-sm text-text-dark/60 mb-2">
           Send your message to:
         </p>
-        <a
-          href={`mailto:${siteConfig.contact.email}`}
-          className="text-primary font-medium text-lg hover:underline"
-        >
+        <EmailLink email={siteConfig.contact.email} className="text-primary font-medium text-lg hover:underline">
           {siteConfig.contact.email}
-        </a>
+        </EmailLink>
       </div>
 
       <div className="mt-10 space-y-3 text-sm text-text-dark/50">

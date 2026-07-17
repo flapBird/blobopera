@@ -1,3 +1,4 @@
+import EmailLink from "@/components/EmailLink";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site.config";
 import LegalPage from "@/components/LegalPage";
@@ -235,12 +236,9 @@ export default function PrivacyPage() {
           If you have questions about this Privacy Policy, how your data is
           handled, or would like to exercise your data protection rights,
           please contact us at{" "}
-          <a
-            href={`mailto:${siteConfig.contact.email}`}
-            className="text-primary underline"
-          >
+          <EmailLink email={siteConfig.contact.email} className="text-primary underline">
             {siteConfig.contact.email}
-          </a>
+          </EmailLink>
           .
         </p>
       </section>
