@@ -3,7 +3,7 @@ import { siteConfig } from "@/lib/site.config";
 
 export const metadata = buildMetadata({
   title: "Contact",
-  description: "Get in touch with the Blob Opera team. Send feedback, report issues, or inquire about partnerships and advertising.",
+  description: "Contact the independent Blob Opera website. Send feedback, report issues, or inquire about partnerships.",
   path: "/contact",
 });
 
@@ -14,13 +14,19 @@ export default function ContactPage() {
         Contact Us
       </h1>
 
-      <p className="text-text-dark/70 leading-relaxed mb-5">
-        Have feedback about {siteConfig.siteName}, found a bug with the
-        game embed, or want to discuss a partnership? We would love to hear
-        from you.
+      <p className="text-text-dark/70 leading-relaxed mb-3">
+        {siteConfig.siteName} is an independent website. If you have
+        feedback about our site, found a bug with the game embed, or want
+        to discuss a partnership, we would love to hear from you.
       </p>
 
-      <p className="text-text-dark/70 leading-relaxed mb-8">
+      <p className="text-text-dark/50 text-xs mb-8">
+        Note: This site is not affiliated with David Li, Google LLC, or
+        Google Arts & Culture. For matters regarding the original Blob
+        Opera game, please contact Google Arts & Culture directly.
+      </p>
+
+      <p className="text-text-dark/70 leading-relaxed mb-5">
         We aim to respond to all inquiries within 48 hours. Whether it is a
         suggestion for improving the site, a technical issue that needs
         attention, or an advertising or collaboration opportunity — drop us
@@ -46,9 +52,8 @@ export default function ContactPage() {
         </p>
         <ul className="list-disc pl-5 space-y-1">
           <li>Bug reports or site performance issues</li>
-          <li>Game removal or attribution requests</li>
-          <li>Advertising and partnership inquiries</li>
           <li>General feedback and suggestions</li>
+          <li>Advertising and partnership inquiries</li>
         </ul>
         <p className="pt-2">
           Please include as much detail as possible so we can help you
