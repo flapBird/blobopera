@@ -18,6 +18,7 @@ export function buildMetadata({ title, description, path }: PageSeoInput): Metad
   const canonical = `${siteConfig.domain}${path}`;
 
   return {
+    metadataBase: new URL(siteConfig.domain),
     title: pageTitle,
     description: pageDescription,
     alternates: { canonical },
@@ -43,6 +44,7 @@ export function buildMetadata({ title, description, path }: PageSeoInput): Metad
 
 export function buildVideoGameJsonLd() {
   return {
+    metadataBase: new URL(siteConfig.domain),
     "@context": "https://schema.org",
     "@type": "VideoGame",
     name: siteConfig.game.name,
@@ -69,6 +71,7 @@ export function buildArticleJsonLd({
   authorName?: string;
 }) {
   return {
+    metadataBase: new URL(siteConfig.domain),
     "@context": "https://schema.org",
     "@type": "Article",
     headline: title,
