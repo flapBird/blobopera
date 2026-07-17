@@ -2,11 +2,8 @@ import { Metadata } from "next";
 import { siteConfig } from "./site.config";
 
 interface PageSeoInput {
-  /** Page-specific title (without site name suffix). If omitted, uses seo.title for home or siteName fallback. */
   title?: string;
-  /** Page-specific description. If omitted, falls back to seo.description. */
   description?: string;
-  /** Path starting with '/', e.g. '/', '/about'. */
   path: string;
 }
 
@@ -23,21 +20,13 @@ export function buildMetadata({ title, description, path }: PageSeoInput): Metad
   return {
     title: pageTitle,
     description: pageDescription,
-    alternates: {
-      canonical,
-    },
+    alternates: { canonical },
     openGraph: {
       title: pageTitle,
       description: pageDescription,
       url: canonical,
       siteName: siteConfig.siteName,
-      images: [
-        {
-          url: siteConfig.seo.ogImage,
-          width: 1200,
-          height: 630,
-        },
-      ],
+      images: [{ url: siteConfig.seo.ogImage, width: 1200, height: 630 }],
       type: "website",
     },
     twitter: {
@@ -46,17 +35,12 @@ export function buildMetadata({ title, description, path }: PageSeoInput): Metad
       description: pageDescription,
       images: [siteConfig.seo.ogImage],
     },
-    // Google Search Console verification
     ...(siteConfig.analytics.gscVerification
       ? { verification: { google: siteConfig.analytics.gscVerification } }
       : {}),
   };
 }
 
-/**
- * Build a VideoGame JSON-LD object for the homepage.
- * Validate at https://search.google.com/test/rich-results after deployment.
- */
 export function buildVideoGameJsonLd() {
   return {
     "@context": "https://schema.org",
@@ -68,5 +52,42 @@ export function buildVideoGameJsonLd() {
     description: siteConfig.seo.description,
     url: siteConfig.domain,
     image: `${siteConfig.domain}${siteConfig.seo.ogImage}`,
+  };
+}
+
+export function buildArticleJsonLd({
+  title,
+  description,
+  url,
+  publishedAt,
+  authorName,
+}: {
+  title: string;
+  description: string;
+  url: string;
+  publishedAt: string;
+  authorName?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    url,
+    image: `${siteConfig.domain}${siteConfig.seo.ogImage}`,
+    datePublished: publishedAt,
+    dateModified: publishedAt,
+    author: {
+      "@type": "Organization",
+      name: authorName ?? siteConfig.siteName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.siteName,
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
   };
 }
