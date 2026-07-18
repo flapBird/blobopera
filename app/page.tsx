@@ -81,13 +81,16 @@ export default function HomePage() {
               <p className="text-text-dark/70 leading-relaxed">{section.body}</p>
             </div>
           ))}
+
           <ImagePlaceholder src="/blob-desc-1.webp" alt="Blob Opera singing quartet" />
+
           {GAME_SECTIONS.slice(1, 2).map((section, i) => (
-            <div key={`v-${i}`}>
+            <div key={`v-21`}>
               <h2 className="font-heading font-bold text-2xl text-text-dark mb-3">{section.heading}</h2>
               <p className="text-text-dark/70 leading-relaxed">{section.body}</p>
             </div>
           ))}
+
           {/* How to Play */}
           <div>
             <h2 className="font-heading font-bold text-2xl text-text-dark mb-3">How to Play</h2>
@@ -100,7 +103,9 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+
           <ImagePlaceholder src="/blob-desc-2.webp" alt="Blob Opera controls" />
+
           {/* Record & Replay feature */}
           <div>
             <h2 className="font-heading font-bold text-2xl text-text-dark mb-3">
@@ -124,20 +129,25 @@ export default function HomePage() {
           </div>
 
           <ImagePlaceholder src="/blob-desc-3.webp" alt="Record button" />
+
           {/* City themes */}
           <div>
             <h2 className="font-heading font-bold text-2xl text-text-dark mb-3">City Themes &amp; Preset Songs</h2>
             <p className="text-text-dark/70 leading-relaxed mb-4">Blob Opera is not just one stage — it takes you around the world. Each city has its own unique backdrop and preset songs.</p>
             <p className="text-text-dark/70 leading-relaxed">Switch between London, New York, and Sydney to change the stage background and available songs.</p>
           </div>
+
           <ImagePlaceholder src="/blob-desc-4.webp" alt="Blob Opera city theme switcher" />
+
           {GAME_SECTIONS.slice(2).map((section, i) => (
-            <div key={`h-${i}`}>
+            <div key={`h-21`}>
               <h2 className="font-heading font-bold text-2xl text-text-dark mb-3">{section.heading}</h2>
               <p className="text-text-dark/70 leading-relaxed">{section.body}</p>
             </div>
           ))}
+
           <ImagePlaceholder src="/blob-desc-5.webp" maxWidth={700} alt="" />
+
           {/* Latest Articles section */}
           {latestArticles.length > 0 && (
             <div className="mt-12">
@@ -157,7 +167,8 @@ export default function HomePage() {
               </div>
             </div>
           )}
-{/* FAQ section */}
+
+          {/* FAQ section */}
           <div>
             <h2 className="font-heading font-bold text-2xl text-text-dark mb-6">Frequently Asked Questions</h2>
             <div className="space-y-5">
@@ -169,8 +180,10 @@ export default function HomePage() {
               ))}
             </div>
           </div>
+
           <VideoPlaceholder title="See Blob Opera in Action" videoId="ZfLYuXi6sDI" />
         </section>
+
         <AdSlot type="banner" className="my-8" />
       </SidebarLayout>
     </>

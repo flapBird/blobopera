@@ -121,7 +121,8 @@ export default function GameEmbed() {
       </div>
 
       {/* Toolbar */}
-      <div className="flex items-center justify-end gap-1 mt-2 text-text-dark/50 relative">
+      <p className="text-xs text-text-dark/30 text-center mb-1">An independent fan site.</p>
+<div className="flex items-center justify-end gap-1 mt-1 text-text-dark/50 relative">
         {/* Vote feedback toast */}
         {showToast && (
           <div
