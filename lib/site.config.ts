@@ -70,7 +70,7 @@ export const siteConfig = {
 
   contact: {
     /** Contact email shown on /contact and in legal pages. */
-    email: "hello@blobopera.xyz",
+    email: "contact@blobopera.xyz",
   },
 
   legal: {
