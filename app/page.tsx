@@ -1,5 +1,8 @@
 import { buildMetadata, buildVideoGameJsonLd } from "@/lib/seo";
 import Hero from "@/components/Hero";
+import QuizTeaser from "@/components/QuizTeaser";
+import GalleryTeaser from "@/components/GalleryTeaser";
+import ChordTeaser from "@/components/ChordTeaser";
 import SidebarLayout from "@/components/SidebarLayout";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import AdSlot from "@/components/AdSlot";
@@ -73,6 +76,37 @@ export default function HomePage() {
       <SchemaMarkup jsonLd={buildVideoGameJsonLd()} />
       <Hero />
       <SidebarLayout>
+        <QuizTeaser />
+
+        <div className="mb-8">
+          <h2 className="font-heading font-bold text-xl text-text-dark mb-3">
+            Recording Gallery
+          </h2>
+          <GalleryTeaser />
+          <div className="mt-2">
+            <a
+              href="/gallery"
+              className="inline-flex items-center gap-1 text-xs text-primary hover:underline font-heading font-semibold"
+            >
+              Browse all recordings &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div className="mb-8">
+          <h2 className="font-heading font-bold text-xl text-text-dark mb-3">
+            Chord Builder
+          </h2>
+          <ChordTeaser />
+          <div className="mt-2">
+            <a
+              href="/tools/chord-builder"
+              className="inline-flex items-center gap-1 text-xs text-primary hover:underline font-heading font-semibold"
+            >
+              Try the chord builder &rarr;
+            </a>
+          </div>
+        </div>
         {/* Game introduction sections */}
         <section className="space-y-8">
           {GAME_SECTIONS.slice(0, 1).map((section, i) => (
@@ -81,8 +115,6 @@ export default function HomePage() {
               <p className="text-text-dark/70 leading-relaxed">{section.body}</p>
             </div>
           ))}
-
-          <ImagePlaceholder src="/blob-desc-1.webp" alt="Blob Opera singing quartet" />
 
           {GAME_SECTIONS.slice(1, 2).map((section, i) => (
             <div key={`v-21`}>

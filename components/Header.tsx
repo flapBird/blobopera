@@ -17,6 +17,24 @@ export default function Header() {
         {/* Navigation */}
         <nav className="flex items-center gap-6">
           <Link
+            href="/quiz"
+            className="text-base text-text-dark/80 hover:text-primary transition-colors font-semibold"
+          >
+            Quiz
+          </Link>
+          <Link
+            href="/gallery"
+            className="text-base text-text-dark/80 hover:text-primary transition-colors font-semibold"
+          >
+            Gallery
+          </Link>
+          <Link
+            href="/tools/chord-builder"
+            className="text-base text-text-dark/80 hover:text-primary transition-colors font-semibold"
+          >
+            Tools
+          </Link>
+          <Link
             href="/articles"
             className="text-base text-text-dark/80 hover:text-primary transition-colors font-semibold"
           >
