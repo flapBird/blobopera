@@ -39,7 +39,7 @@ export const siteConfig = {
     genre: ["Music", "Creative"],
 
     /** iframe embed URL — must be manually replaced with the real embeddable URL. */
-    embedUrl: "https://blob-opera.com/embed/blob-opera.html",
+    embedUrl: "https://gacembed.withgoogle.com/blob-opera",
 
     /** Aspect ratio of the embedded game, used to prevent CLS. */
     aspectRatio: "16 / 9",
@@ -51,7 +51,38 @@ export const siteConfig = {
     ageRating: "Everyone",
 
     /** Attribution displayed below the game and in the footer. */
-    sourceAttribution: "Created by David Li · Google Arts & Culture",
+   sourceAttribution: "Created by David Li · Google Arts & Culture",
+ },
+
+  gallery: {
+    /** Example recordings shown on the homepage gallery preview and used as seed data on /gallery. */
+    examples: [
+      {
+        title: "Happy Little Blobs",
+        submitterName: "MusicFan42",
+        shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/B7dBMqWD3xDm",
+      },
+      {
+        title: "Bedtime Lullaby",
+        submitterName: "NightOwl",
+        shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/I8MvPe4aHJpt",
+      },
+      {
+        title: "Dramatic Opera Scene",
+        submitterName: "OperaLover",
+        shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/h55g6isQi1XZ",
+      },
+      {
+        title: "Dramatic Opera Scene2",
+        submitterName: "OperaLover",
+        shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/h55g6isQi1XZ",
+      },
+      {
+        title: "Dramatic Opera Scene3",
+        submitterName: "OperaLover",
+        shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/h55g6isQi1XZ",
+      },
+    ],
   },
 
   theme: {

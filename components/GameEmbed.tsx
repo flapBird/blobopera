@@ -112,7 +112,7 @@ export default function GameEmbed() {
             ref={iframeRef}
             className={`w-full h-full transition-opacity duration-500 ${gameState === "loaded" ? "opacity-100" : "opacity-0"}`}
             style={{ minHeight: "480px" }}
-            allow="autoplay; fullscreen"
+            allow="autoplay; fullscreen; clipboard-write"
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
             title={siteConfig.game.name}
             onLoad={handleIframeLoad}
@@ -182,7 +182,10 @@ export default function GameEmbed() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3" />
           </svg>
         </button>
+
+
       </div>
     </div>
   );
 }
+

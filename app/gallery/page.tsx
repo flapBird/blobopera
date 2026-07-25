@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import SidebarLayout from "@/components/SidebarLayout";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import { siteConfig } from "@/lib/site.config";
 
 
 // ---------- types ----------
@@ -55,52 +56,25 @@ function saveSubmissions(subs: Submission[]) {
 }
 
 // Seed submissions for demo
-const SEED_SUBMISSIONS: Submission[] = [
-  {
-    id: "seed-1",
-    title: "Happy Little Blobs",
-    description: "My first attempt at making the blobs sing a cheerful melody. They sound so joyful!",
-    shareLink: "https://blob-opera.com/share/example1",
-    submitterName: "MusicFan42",
-    submittedAt: "2026-07-20T10:00:00Z",
+function generateSeedSubmissions(): Submission[] {
+  const examples = siteConfig.gallery.examples;
+  return examples.map((ex, i) => ({
+    id: "seed-" + (i + 1),
+    title: ex.title,
+    description: "",
+    shareLink: ex.shareLink || "",
+    submitterName: ex.submitterName,
+    submittedAt: new Date(Date.now() - (examples.length - i) * 86400000).toISOString(),
     approved: true,
-  },
-  {
-    id: "seed-2",
-    title: "Bedtime Lullaby",
-    description: "A slow, gentle piece perfect for winding down. The bass blob really shines here.",
-    shareLink: "https://blob-opera.com/share/example2",
-    submitterName: "NightOwl",
-    submittedAt: "2026-07-19T15:30:00Z",
-    approved: true,
-  },
-  {
-    id: "seed-3",
-    title: "Dramatic Opera Scene",
-    description: "Tried to recreate a dramatic operatic moment. Lots of portamento and high notes!",
-    shareLink: "https://blob-opera.com/share/example3",
-    submitterName: "OperaLover",
-    submittedAt: "2026-07-18T20:15:00Z",
-    approved: true,
-  },
-  {
-    id: "seed-4",
-    title: "Blob Quartet Jazz",
-    description: "What if the blobs sang jazz? Turned out surprisingly swingy!",
-    shareLink: "https://blob-opera.com/share/example4",
-    submitterName: "JazzCat",
-    submittedAt: "2026-07-17T12:45:00Z",
-    approved: true,
-  },
-  {
-    id: "seed-5",
-    title: "Rainy Day Melody",
-    description: "Inspired by a rainy afternoon. The mezzo-soprano carries such a warm, cozy tone.",
-    shareLink: "https://blob-opera.com/share/example5",
-    submitterName: "Raindrop",
-    submittedAt: "2026-07-16T09:20:00Z",
-    approved: true,
-  },
+  }));
+}
+
+const COVER_IMAGES = [
+  "/blob-desc-1.webp",
+  "/blob-desc-2.webp",
+  "/blob-desc-3.webp",
+  "/blob-desc-4.webp",
+  "/blob-desc-5.webp",
 ];
 
 function formatDate(iso: string): string {
@@ -134,8 +108,8 @@ export default function GalleryPage() {
     const existing = loadSubmissions();
     if (existing.length === 0) {
       // Seed with demo entries
-      saveSubmissions(SEED_SUBMISSIONS);
-      setSubmissions(SEED_SUBMISSIONS);
+      saveSubmissions(generateSeedSubmissions());
+      setSubmissions(generateSeedSubmissions());
     } else {
       setSubmissions(existing);
     }
@@ -161,8 +135,8 @@ export default function GalleryPage() {
 
     // Validation
     const { title, description, shareLink, submitterName } = formData;
-    if (!title.trim() || !description.trim() || !shareLink.trim()) {
-      setFormError("Title, description, and share link are required.");
+    if (!title.trim() || !description.trim()) {
+      setFormError("Title and description are required.");
       return;
     }
     if (title.trim().length > 80) {
@@ -182,7 +156,8 @@ export default function GalleryPage() {
       );
       return;
     }
-    if (!passesModeration(shareLink)) {
+    // Optional share link — skip moderation if empty
+    if (shareLink.trim() && !passesModeration(shareLink)) {
       setModerationMsg(
         "The share link appears to contain inappropriate content. Please provide a valid Blob Opera share link."
       );
@@ -290,14 +265,14 @@ export default function GalleryPage() {
 
                 <div>
                   <label className="block text-sm font-heading font-semibold text-text-dark mb-1">
-                    Share Link *
+                    Share Link (optional)
                   </label>
                   <input
                     type="url"
                     name="shareLink"
                     value={formData.shareLink}
                     onChange={handleInputChange}
-                    placeholder="https://blob-opera.com/share/..."
+                    placeholder="Paste your Blob Opera share link if you have one"
                     className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 bg-white focus:border-primary focus:outline-none transition-colors text-sm"
                   />
                 </div>
@@ -351,34 +326,69 @@ export default function GalleryPage() {
 
           {/* Gallery grid */}
           {approvedSubmissions.length > 0 ? (
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {approvedSubmissions.map((sub) => (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {approvedSubmissions.map((sub, idx) => (
                 <div
                   key={sub.id}
-                  className="bg-white rounded-2xl border border-gray-100 p-5 hover:shadow-md transition-shadow duration-200"
+                  className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow group"
                 >
-                  <div className="flex items-start justify-between mb-2">
-                    <h3 className="font-heading font-bold text-base text-text-dark leading-tight">
-                      {sub.title}
-                    </h3>
+                  {/* Cover image + play button */}
+                  <div
+                    className="relative w-full overflow-hidden"
+                    style={{ aspectRatio: "4/3" }}
+                  >
+                    <img
+                      src={COVER_IMAGES[idx % COVER_IMAGES.length]}
+                      alt=""
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                    {sub.shareLink ? (
+                      <a
+                        href={sub.shareLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute inset-0 flex items-center justify-center"
+                      >
+                        <div className="w-12 h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                          <svg className="w-5 h-5 text-text-dark ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </a>
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center opacity-40">
+                        <div className="w-12 h-12 rounded-full bg-white/70 shadow-lg flex items-center justify-center">
+                          <svg className="w-5 h-5 text-text-dark ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <p className="text-sm text-text-dark/60 leading-relaxed mb-3 line-clamp-3">
-                    {sub.description}
-                  </p>
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="text-xs text-text-dark/40 truncate">
-                      <span className="font-medium">{sub.submitterName}</span>
-                      {" · "}
-                      {formatDate(sub.submittedAt)}
+                  {/* Info bar */}
+                  <div className="px-3 py-2.5">
+                    <p className="font-heading font-semibold text-sm text-text-dark leading-snug truncate">
+                      {sub.title}
+                    </p>
+                    <div className="flex items-center gap-1 mt-0.5">
+                      <span className="text-xs text-text-dark/40 truncate">{sub.submitterName}</span>
+                      <span className="text-xs text-text-dark/20">{" · "}</span>
+                      <span className="text-xs text-text-dark/40">{formatDate(sub.submittedAt)}</span>
+                      {sub.shareLink && (
+                        <>
+                          <span className="text-xs text-text-dark/20">{" · "}</span>
+                          <a
+                            href={sub.shareLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs text-primary hover:underline font-heading font-semibold flex-shrink-0"
+                          >
+                            Listen
+                          </a>
+                        </>
+                      )}
                     </div>
-                    <a
-                      href={sub.shareLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-shrink-0 px-4 py-1.5 bg-primary/10 text-primary hover:bg-primary/20 rounded-lg font-heading font-semibold text-xs transition-colors"
-                    >
-                      Listen
-                    </a>
                   </div>
                 </div>
               ))}

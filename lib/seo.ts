@@ -44,7 +44,6 @@ export function buildMetadata({ title, description, path }: PageSeoInput): Metad
 
 export function buildVideoGameJsonLd() {
   return {
-    metadataBase: new URL(siteConfig.domain),
     "@context": "https://schema.org",
     "@type": "VideoGame",
     name: siteConfig.game.name,
