@@ -21,11 +21,9 @@ export default function GalleryTeaser() {
             key={r.title}
             className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md transition-shadow group"
           >
-            {r.shareLink ? (
-              <a
-                href={r.shareLink}
-                target="_blank"
-                rel="noopener noreferrer"
+           {r.shareLink ? (
+             <a
+                href={"/watch?url=" + encodeURIComponent(r.shareLink)}
                 className="block relative w-full overflow-hidden"
                 style={{ aspectRatio: "4/3" }}
               >

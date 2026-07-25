@@ -8,15 +8,8 @@ interface EmailLinkProps {
 
 export default function EmailLink({ email, className = "", children }: EmailLinkProps) {
   return (
-    <a
-      href="#"
-      onClick={(e) => {
-        e.preventDefault();
-        window.location.href = "mailto:" + email;
-      }}
-      className={className}
-    >
+    <span className={className}>
       {children ?? email}
-    </a>
+    </span>
   );
 }

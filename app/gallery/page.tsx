@@ -343,11 +343,9 @@ export default function GalleryPage() {
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                    {sub.shareLink ? (
-                      <a
-                        href={sub.shareLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                   {sub.shareLink ? (
+                     <a
+                        href={"/watch?url=" + encodeURIComponent(sub.shareLink)}
                         className="absolute inset-0 flex items-center justify-center"
                       >
                         <div className="w-12 h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
@@ -375,13 +373,11 @@ export default function GalleryPage() {
                       <span className="text-xs text-text-dark/40 truncate">{sub.submitterName}</span>
                       <span className="text-xs text-text-dark/20">{" · "}</span>
                       <span className="text-xs text-text-dark/40">{formatDate(sub.submittedAt)}</span>
-                      {sub.shareLink && (
-                        <>
-                          <span className="text-xs text-text-dark/20">{" · "}</span>
-                          <a
-                            href={sub.shareLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                     {sub.shareLink && (
+                       <>
+                         <span className="text-xs text-text-dark/20">{" · "}</span>
+                         <a
+                            href={"/watch?url=" + encodeURIComponent(sub.shareLink)}
                             className="text-xs text-primary hover:underline font-heading font-semibold flex-shrink-0"
                           >
                             Listen

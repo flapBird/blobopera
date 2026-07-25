@@ -528,8 +528,8 @@ export default function QuizPage() {
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-text-dark mb-3">
           Music Theory Quiz
         </h1>
-        <p className="text-text-dark/60 max-w-2xl mx-auto text-base leading-relaxed">
-          Test your knowledge of voice types, harmony, and Blob Opera. Challenge yourself with our interactive quizzes or train your ears with interval recognition.
+        <p className="text-text-dark/60 max-w-3xl mx-auto text-sm leading-relaxed">
+          Our quizzes cover the four vocal ranges and their roles in choral harmony, the music theory behind intervals and chord voicings, and the AI technology that powers Blob Opera. Each quiz has five questions with immediate feedback, and the interval ear training section uses the Web Audio API to generate live tones for practical aural skills practice. All quizzes include explanations for each answer and a personalised rating at the end.
         </p>
       </section>
 
@@ -539,6 +539,9 @@ export default function QuizPage() {
           <div className="space-y-6">
             {/* Knowledge quizzes */}
             <h2 className="font-heading font-bold text-xl text-text-dark">Knowledge Quizzes</h2>
+            <p className="text-sm text-text-dark/50 leading-relaxed mb-1">
+              Voice Type Challenge covers the four main vocal ranges from bass to soprano. Harmony &amp; Theory tests intervals, chords, and voice leading. Blob Opera Facts quizzes your knowledge of the AI and game mechanics.
+            </p>
             <div className="grid gap-4 sm:grid-cols-3">
               {Object.values(QUIZ_META).map((meta) => (
                 <button
@@ -557,6 +560,9 @@ export default function QuizPage() {
 
             {/* Interval ear training */}
             <h2 className="font-heading font-bold text-xl text-text-dark pt-4">Ear Training</h2>
+            <p className="text-sm text-text-dark/50 leading-relaxed mb-1">
+              Practice identifying musical intervals with pairs of tones generated live by the Web Audio API. Work through six common intervals from minor thirds to octaves and train your aural skills.
+            </p>
             <button
               onClick={() => setShowIntervalQuiz(true)}
               className="bg-white rounded-2xl border border-gray-100 p-5 text-left hover:shadow-md hover:border-primary/30 transition-all duration-200 group w-full sm:w-auto"
