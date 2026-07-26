@@ -10,11 +10,6 @@ An independent fan site for [Blob Opera](https://artsandculture.google.com/exper
 
 ## Features
 
-### Game Embed
-
-The full Blob Opera game is embedded as a playable iframe. On first visit, a cover screen with a play button hides the iframe until the user clicks — no auto-loading, no unnecessary bandwidth. Below the game, a toolbar provides like/dislike feedback, reload, and fullscreen controls.
-
-The embed URL points to Google's official embed endpoint (`gacembed.withgoogle.com/blob-opera/`) rather than third-party wrappers.
 
 ### Educational Articles (23 articles)
 
@@ -179,7 +174,6 @@ The 23 articles live in `lib/articles.ts` as structured data. Each article has:
 
 The Blob Opera game itself is the work of **David Li** and **Google Arts & Culture**. This site is an independent fan project. All original code in this repository (the site shell, quiz engine, chord builder, articles, and gallery) is provided for reference and educational purposes.
 
-The site includes no proprietary Blob Opera assets — the game is loaded directly from Google's official embed URL.
 
 ---
 
