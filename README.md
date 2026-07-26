@@ -1,117 +1,191 @@
-# Game Site Template
+# Blob Opera
 
-A reusable Next.js 14 template for building single-game "shell" sites optimized for search engine traffic. Each new game site only requires editing one config file and swapping a few images.
+An independent fan site for [Blob Opera](https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw), the AI-powered singing experiment by David Li and Google Arts & Culture. The site embeds the game alongside original educational content — articles about AI music and vocal harmony, interactive quizzes, a chord builder with Web Audio, and a community recording gallery.
 
-## Quick Start (5 Minutes)
+**Live site:** [https://blobopera.xyz/](https://blobopera.xyz/)
 
-### 1. Create a new repo from this template
+> This is not an official Google product. Blob Opera is a creation of David Li & Google Arts & Culture.
 
-- On GitHub, click **Use this template** → **Create a new repository**
-- Clone your new repo locally
+---
 
-### 2. Configure your site
+## Features
 
-Edit **`lib/site.config.ts`** — this is the only file you need to touch for content:
+### Game Embed
 
-| Field | What to change |
-|-------|----------------|
-| `siteName` | Your site's display name |
-| `domain` | Full domain, e.g. `https://mygame.com` (no trailing slash) |
-| `seo.title` | Homepage `<title>` tag |
-| `seo.description` | Meta description (keep under 160 chars) |
-| `seo.keywords` | Comma-separated keyword list |
-| `game.name` | The game's name |
-| `game.genre` | Genre array for JSON-LD, e.g. `["Sports", "Basketball"]` |
-| `game.embedUrl` | The real iframe embed URL — must be replaced |
-| `game.aspectRatio` | Aspect ratio of the game (default `"16 / 9"`) |
-| `game.ageRating` | Age rating label |
-| `game.sourceAttribution` | Developer credit line |
-| `contact.email` | Your contact email |
-| `legal.lastUpdated` | Date the legal pages were last reviewed |
+The full Blob Opera game is embedded as a playable iframe. On first visit, a cover screen with a play button hides the iframe until the user clicks — no auto-loading, no unnecessary bandwidth. Below the game, a toolbar provides like/dislike feedback, reload, and fullscreen controls.
 
-### 3. Replace placeholder images
+The embed URL points to Google's official embed endpoint (`gacembed.withgoogle.com/blob-opera/`) rather than third-party wrappers.
 
-Replace these files in `public/`:
+### Educational Articles (23 articles)
 
-- `cover.jpg` — Game cover / launch screen image
-- `og-image.png` — Social sharing image (1200×630px)
-- `favicon.ico` — Browser tab icon
+Four categories covering different aspects of vocal music and AI technology:
 
-### 4. Customize page content
+| Category | Focus |
+|---|---|
+| **AI & Music Technology** | How neural vocoders work, real-time vocal synthesis, the harmony engine, training datasets |
+| **Music Education** | Voice types (bass / tenor / mezzo / soprano), vibrato, portamento, vowel shaping, dynamic range |
+| **Music Appreciation** | Algorithmic composition history, psychology of musical preference, why Blob Opera works |
+| **Guides & Tutorials** | Tips for creating melodies, using Blob Opera in the classroom |
 
-Look for `PLACEHOLDER:` markers in:
-- `app/page.tsx` — Game introduction sections
-- `app/about/page.tsx` — About page
+Each article has unique meta descriptions, keywords, related article links, and JSON-LD structured data.
 
-Always write unique content per game site to avoid duplicate-content penalties.
+### Music Theory Quiz
 
-### 5. Run locally
+An interactive quiz with three categories:
+- **Voice Type Challenge** — Identify bass, tenor, mezzo-soprano, and soprano by their range and role
+- **Harmony & Theory** — Test knowledge of intervals, chords, and voice leading
+- **Blob Opera Facts** — Questions about the AI training, controls, and game mechanics
+
+Each quiz has 5 questions with instant feedback and explanations. A results screen shows the score with a personalised rating (Maestro / Virtuoso / Apprentice / Beginner).
+
+### Interval Ear Training
+
+A Web Audio API-powered ear trainer. The browser generates pairs of tones (using oscillator nodes with attack/release envelopes) and asks the user to identify the interval. Covers six intervals from minor third to octave.
+
+### Recording Gallery
+
+A community submission page where users can share their Blob Opera recording links with a title and description. Submissions are stored in localStorage and displayed in a grid of cards with cover images. A keyword-based moderation filter screens submissions for inappropriate content.
+
+### Chord Builder
+
+An interactive music theory tool that lets users click on a 3-octave keyboard to build chords. The tool recognises common chord types (major, minor, diminished, augmented, seventh chords, etc.) and labels them with their consonance/dissonance quality. Each note is audible via Web Audio API triangle-wave oscillators with staggered attack envelopes for realistic voicing.
+
+### Recording Playback (`/watch`)
+
+Clicking a recording card opens an in-site playback page (`/watch?url=...`) that embeds the game in an iframe with the recording hash. The user stays on the same domain throughout — no external tab-jumping.
+
+---
+
+## Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Audio:** Web Audio API (oscillator synthesis, gain envelopes)
+- **Fonts:** Nunito (headings), Quicksand (body) via Google Fonts
+- **Analytics:** Google Analytics 4 (optional, via env var)
+- **Ads:** Google AdSense (optional, disabled by default)
+- **Deployment:** Vercel (static export compatible)
+
+---
+
+## Project Structure
+
+```
+app/
+├── about/              # About page
+├── articles/           # Article pages (23 articles, SSR)
+│   ├── [slug]/         # Dynamic article route
+│   └── page.tsx        # Article listing page
+├── contact/            # Contact page
+├── gallery/            # Recording gallery with submission form
+├── privacy/            # Privacy policy
+├── quiz/               # Interactive music theory quiz
+├── terms/              # Terms of service
+├── tools/
+│   └── chord-builder/  # Web Audio chord builder tool
+├── watch/              # In-site recording playback page
+├── layout.tsx          # Root layout with fonts, GA, AdSense
+├── page.tsx            # Homepage with game embed + feature previews
+├── globals.css         # Global styles
+├── sitemap.ts          # Auto-generated sitemap
+└── robots.ts           # Robots.txt
+
+components/
+├── GameEmbed.tsx       # Game iframe with idle/loading/loaded states
+├── QuizTeaser.tsx      # Homepage quiz preview with sample question
+├── GalleryTeaser.tsx   # Homepage gallery preview cards
+├── ChordTeaser.tsx     # Homepage chord preset showcase
+├── Header.tsx          # Navigation header
+├── Footer.tsx          # Footer with links and attribution
+├── SidebarLayout.tsx   # Content layout with optional ad sidebars
+├── ArticleCard.tsx     # Article listing card
+├── ArticleLayout.tsx   # Article content layout
+├── Hero.tsx            # Homepage hero with game embed wrapper
+├── SchemaMarkup.tsx    # JSON-LD structured data injector
+├── AdSlot.tsx          # AdSense placement slots (placeholder)
+├── EmailLink.tsx       # Email display component (plain text)
+└── VideoPlaceholder.tsx
+    ImagePlaceholder.tsx
+    LegalPage.tsx
+
+lib/
+├── site.config.ts      # Single source of truth for site config
+├── articles.ts         # Article content and metadata
+└── seo.ts              # Metadata and JSON-LD builders
+
+public/
+├── blob-desc-1.webp    # Screenshots used in articles and gallery
+├── blob-desc-2.webp
+├── blob-desc-3.webp
+├── blob-desc-4.webp
+├── blob-desc-5.webp
+├── favicon.ico / .png / .svg
+├── og-image.png        # Social sharing image (1200×630)
+└── ads.txt             # AdSense verification file
+```
+
+---
+
+## Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to preview.
+The dev server starts at `http://localhost:3000`.
 
-### 6. Deploy to Vercel
+### Build
 
-**Recommended (GitHub integration):**
-1. In Vercel, click **New Project** → import your repo
-2. Framework Preset auto-detects Next.js — leave defaults
-3. Add environment variables from `.env.example` if needed
-4. Under **Domains**, bind your domain
-5. Deploy
-
-**CLI alternative:**
 ```bash
-npm i -g vercel
-vercel login
-vercel
-vercel --prod
+npm run build
 ```
 
-### 7. Submit to Google Search Console
-
-1. Go to [Google Search Console](https://search.google.com/search-console)
-2. Add property using domain verification
-3. Submit `sitemap.xml` (e.g. `https://your-domain.com/sitemap.xml`)
+Generates a production build in `.next/`. All pages are statically generated where possible.
 
 ---
 
-## SEO Checklist
+## Configuration
 
-- [ ] Every page has a unique `<title>` in the correct format
-- [ ] Every page `description` is under 160 characters and unique
-- [ ] Every page has a canonical URL
-- [ ] Open Graph / Twitter Card tags verified (use [opengraph.xyz](https://www.opengraph.xyz/))
-- [ ] Homepage `VideoGame` JSON-LD passes [Rich Results Test](https://search.google.com/test/rich-results)
-- [ ] `sitemap.xml` and `robots.txt` are accessible
-- [ ] Lighthouse mobile performance score ≥ 80
-- [ ] Mobile: game starts on tap, no horizontal scroll
-- [ ] All placeholder images replaced with real assets
-- [ ] Google Search Console verified and sitemap submitted
+### `lib/site.config.ts`
 
-## AdSense (Post-Launch)
+All site-wide settings are centralised here:
 
-1. Keep `ads.enabled: false` until AdSense is approved
-2. Site should have 2+ weeks of stable traffic before applying
-3. Ensure Privacy Policy and Terms pages are accessible
-4. After approval:
-   - Replace placeholder in `components/AdSlot.tsx` with real `<ins class="adsbygoogle">`
-   - Set `ads.enabled: true` in `lib/site.config.ts`
+- `siteName` / `domain` — Display name and canonical domain
+- `seo` — Title, description, keywords, OG image
+- `game` — Embed URL, aspect ratio, age rating, attribution
+- `gallery.examples` — Example recordings shown on the homepage and used as seed data on `/gallery`; set `shareLink` to a valid recording URL for inline playback
+- `contact` — Email address shown on legal pages
+- `ads` — AdSense client ID (set via `NEXT_PUBLIC_ADSENSE_CLIENT_ID` env var)
+- `analytics` — Google Analytics ID (set via `NEXT_PUBLIC_GA_ID` env var)
 
-## Tech Stack
+---
 
-- Next.js 14 (App Router)
-- TypeScript
-- Tailwind CSS
-- Google Fonts (Nunito + Quicksand)
-- Vercel deployment
+## Content
 
-## Notes
+The 23 articles live in `lib/articles.ts` as structured data. Each article has:
 
-- This template supports iframe-embedded games only (no SWF/Ruffle)
-- English only; all copy is centralized in `lib/site.config.ts` for future i18n
-- Ad slots are placeholder only by default; real AdSense code must be added post-approval
-- Always verify iframe embed permissions with the game developer and maintain visible source attribution
+- A unique slug, title, and description
+- A category (`ai-music`, `music-education`, `guides`, `music-appreciation`)
+- Reading time estimate and publish date
+- Keywords for SEO
+- Related article slugs for cross-linking
+- One or more sections with headings, body text, and optional list items
+
+---
+
+## License and Attribution
+
+The Blob Opera game itself is the work of **David Li** and **Google Arts & Culture**. This site is an independent fan project. All original code in this repository (the site shell, quiz engine, chord builder, articles, and gallery) is provided for reference and educational purposes.
+
+The site includes no proprietary Blob Opera assets — the game is loaded directly from Google's official embed URL.
+
+---
+
+## Acknowledgements
+
+- David Li for creating Blob Opera
+- Google Arts & Culture for hosting the experiment
+- The Google Creative Lab team behind the project
+- Christian Joel, Frederick Tong, Joanna Goldsmith-Eteson, and Elora Wesner — the four opera singers whose voices trained the AI model
