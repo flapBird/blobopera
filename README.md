@@ -1,6 +1,6 @@
 # Blob Opera
 
-An independent fan site for [Blob Opera](https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw), the AI-powered singing experiment by David Li and Google Arts & Culture. The site embeds the game alongside original educational content — articles about AI music and vocal harmony, interactive quizzes, a chord builder with Web Audio, and a community recording gallery.
+An independent fan site for Blob Opera, the AI-powered singing experiment by David Li and Google Arts & Culture. The site embeds the game alongside original educational content — articles about AI music and vocal harmony, interactive quizzes, a chord builder with Web Audio, and a community recording gallery.
 
 **Live site:** [https://blobopera.xyz/](https://blobopera.xyz/)
 
