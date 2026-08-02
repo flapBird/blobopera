@@ -26,6 +26,7 @@ export default function GalleryTeaser() {
                 href={"/watch?url=" + encodeURIComponent(r.shareLink)}
                 className="block relative w-full overflow-hidden"
                 style={{ aspectRatio: "4/3" }}
+                aria-label={`Play ${r.title}`}
               >
                 <img
                   src={coverImg}
@@ -66,7 +67,7 @@ export default function GalleryTeaser() {
               <p className="font-heading font-semibold text-sm text-text-dark leading-snug truncate">
                 {r.title}
               </p>
-              <p className="text-xs text-text-dark/40 leading-snug truncate">
+              <p className="text-xs text-text-dark/70 leading-snug truncate">
                 by {r.submitterName}
               </p>
             </div>

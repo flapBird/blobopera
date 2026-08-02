@@ -12,7 +12,7 @@ export const metadata = buildMetadata({
 export default function PrivacyPage() {
   return (
     <LegalPage title="Privacy Policy">
-      <p className="text-sm text-text-dark/50 mb-6">
+      <p className="text-sm text-text-dark/70 mb-6">
         At {siteConfig.siteName} we take your privacy seriously. This policy
         explains what information we collect when you visit {siteConfig.domain},
         how we use it, and your rights regarding your data.
@@ -38,21 +38,17 @@ export default function PrivacyPage() {
           2. Cookies
         </h2>
         <p>
-          Our site may use cookies and similar technologies to enhance your
-          browsing experience, analyze site traffic, and serve relevant
-          advertisements. You can configure your browser to refuse all
-          cookies or alert you when cookies are being sent. Note that
-          disabling cookies may affect how certain features function,
-          including the embedded Blob Opera game.
+          This site can use cookies or similar technologies when optional
+          analytics or advertising is enabled. The embedded Blob Opera
+          experiment is hosted by Google Arts &amp; Culture and may use its own
+          storage under Google&apos;s policies. You can configure your browser
+          to refuse cookies, although that may affect embedded features.
         </p>
-        <p className="mt-3">
-          Third-party vendors, including Google, use cookies to serve ads
-          based on a user&apos;s prior visits to this site or other sites.
-          Google&apos;s use of advertising cookies enables it and its
-          partners to serve ads to users based on their visit to this site
-          and/or other sites on the Internet.
-        </p>
-        <p className="mt-3">
+        {siteConfig.ads.enabled && siteConfig.ads.clientId && <p className="mt-3">
+          When advertising is enabled, third-party vendors including Google
+          may use cookies to deliver and measure ads.
+        </p>}
+        {siteConfig.ads.enabled && siteConfig.ads.clientId && <p className="mt-3">
           Users may opt out of personalized advertising by visiting
           Google&apos;s{" "}
           <a
@@ -74,14 +70,14 @@ export default function PrivacyPage() {
             Network Advertising Initiative opt-out page
           </a>
           .
-        </p>
+        </p>}
       </section>
 
       <section>
         <h2 className="font-heading font-bold text-xl text-text-dark mt-8 mb-3">
           3. Third-Party Services
         </h2>
-        <p>
+        {siteConfig.analytics.gaId ? <p>
           <strong>Google Analytics.</strong> We use Google Analytics to
           understand how visitors use the site. Google Analytics collects
           information such as how often users visit, what pages they visit,
@@ -108,8 +104,11 @@ export default function PrivacyPage() {
             Google Analytics opt-out browser add-on
           </a>
           .
-        </p>
-        <p className="mt-3">
+        </p> : <p>
+          <strong>Analytics.</strong> Google Analytics is not loaded unless a
+          measurement ID is configured for this deployment.
+        </p>}
+        {siteConfig.ads.enabled && siteConfig.ads.clientId ? <p className="mt-3">
           <strong>Google AdSense.</strong> We use Google AdSense to display
           advertisements on the site. Google AdSense uses cookies, web
           beacons, and similar tracking technologies to serve ads relevant
@@ -125,7 +124,10 @@ export default function PrivacyPage() {
             How Google uses information from sites or apps that use our services
           </a>
           .
-        </p>
+        </p> : <p className="mt-3">
+          <strong>Advertising.</strong> Google AdSense ad units are not
+          currently enabled on this site.
+        </p>}
         <p className="mt-3">
           <strong>Google Arts &amp; Culture (Embedded Game).</strong> The
           Blob Opera game embedded on {siteConfig.siteName} is hosted by
@@ -138,7 +140,7 @@ export default function PrivacyPage() {
         </p>
       </section>
 
-      <section>
+      {siteConfig.ads.enabled && siteConfig.ads.clientId && <section>
         <h2 className="font-heading font-bold text-xl text-text-dark mt-8 mb-3">
           4. Advertising and Google AdSense
         </h2>
@@ -200,7 +202,7 @@ export default function PrivacyPage() {
           . We do not pass any personally identifiable information to
           Google through our AdSense implementation.
         </p>
-      </section>
+      </section>}
 
       <section>
         <h2 className="font-heading font-bold text-xl text-text-dark mt-8 mb-3">
@@ -236,9 +238,10 @@ export default function PrivacyPage() {
           If you have questions about this Privacy Policy, how your data is
           handled, or would like to exercise your data protection rights,
           please contact us at{" "}
-          <EmailLink email={siteConfig.contact.email} className="text-primary underline">
-            {siteConfig.contact.email}
-          </EmailLink>
+          <EmailLink
+            email={siteConfig.contact.email}
+            className="text-primary underline"
+          />
           .
         </p>
       </section>

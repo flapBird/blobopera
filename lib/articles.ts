@@ -50,27 +50,27 @@ const articles: ArticleContent[] = [
       {
         heading: "The Challenge of Teaching a Machine to Sing",
         headingLevel: 2,
-        body: "Teaching a computer to sing is fundamentally different from teaching it to recognize speech or generate text. Singing demands precise control over pitch, timbre, vibrato, dynamics, and expression -- all in real time. Unlike a text-to-speech system that produces flat, monotone output, a singing AI must handle microtonal pitch variations, smooth transitions between notes, and subtle changes in vocal color. This is why Blob Opera, the interactive AI singing experiment from Google Arts & Culture, represents such a significant technical achievement. It takes a problem that professional audio researchers have worked on for decades and distills it into something anyone can play with in a browser.",
+        body: "Singing contains more than words and a target note. A useful model must represent changing pitch and vocal color while responding quickly enough to feel playable. Blob Opera turns that research problem into a simple browser interaction: vertical movement changes pitch and another direction changes the vowel sound. Google describes the result as a machine-learning experiment, not as a recording player or a complete simulation of a human singer.",
       },
       {
         heading: "The Dataset: 16 Hours of Professional Opera",
         headingLevel: 2,
-        body: "Every good AI starts with good data, and Blob Opera's team invested heavily in the foundation. Four professional opera singers 2014 Christian Joel (bass), Frederick Tong (tenor), Joanna Goldsmith-Eteson (mezzo-soprano), and Elora Wesner (soprano) -- a bass, a tenor, a mezzo-soprano, and a soprano -- each spent hours in a recording studio singing across their full vocal range. They sang at different pitches, with different vowel shapes ('ah,' 'ee,' 'oo'), with and without vibrato, and at varying volumes. The result was roughly 16 hours of meticulously labeled audio data. Each recording was tagged with the singer's voice type, the pitch being sung, the vowel being shaped, and the expressive technique being used. This rich corpus became the training material for the neural network.",
+        body: "Google credits tenor Christian Joel, bass Frederick Tong, mezzo-soprano Joanna Gamble, and soprano Olivia Doutney. Together they recorded 16 hours of singing. David Li says that material was fed into a convolutional neural network that learned to reproduce each represented voice type. Google has not published a detailed dataset card, annotation scheme, or complete training recipe, so those details should not be inferred from the public demonstration.",
       },
       {
         heading: "What the Neural Network Actually Learns",
         headingLevel: 2,
-        body: "The trained model does not simply stitch together pre-recorded audio clips. Instead, it learns a continuous model of the human voice. It understands that pitch is a continuous dimension -- so a smooth glide between two notes produces portamento, not an abrupt jump. It learns that vowels occupy specific regions in formant space and that transitioning between them produces natural sonic shifts. Most impressively, it captures the subtle interplay between pitch, vowel, and expression. A high note sung on an 'ah' vowel feels different from the same pitch on an 'oo,' and the model internalizes that difference without being explicitly programmed to do so.",
+        body: "The official experiment page makes an important distinction: listeners do not hear the four singers' original voices. They hear the model's understanding of what opera singing sounds like, based on what it learned from the recordings. That statement supports describing the output as model-generated. It does not reveal exactly how the system represents formants, expression, or transitions internally.",
       },
       {
         heading: "Real-Time Inference at Your Fingertips",
         headingLevel: 2,
-        body: "When you drag a blob in Blob Opera, you are interacting with a fully trained neural network running in real time inside your browser. Every movement is translated into a set of parameters that the model uses to generate audio on the fly. The model outputs audio frames at speeds fast enough to feel instantaneous, typically generating tens of thousands of audio samples per second. This is the hardest part of the technical challenge: not just training a model that sounds good, but one that can run efficiently enough inside a web browser to respond instantly to user input.",
+        body: "Blob Opera responds to gestures in real time and uses modern web-audio technology. Google notes that the experiment may not perform optimally on older devices. Public project materials do not specify the audio frame size, sample generation method, or which computations happen locally versus through other browser resources, so this article does not assign an undocumented architecture to the experience.",
       },
       {
         heading: "Beyond Blob Opera",
         headingLevel: 2,
-        body: "The techniques that power Blob Opera are part of a broader revolution in AI-assisted music creation. Similar neural vocoders and synthesis models are being used in professional music production tools, accessibility software for people with vocal disabilities, and educational platforms. The core insight -- that deep neural networks can learn the physics and artistry of the human voice well enough to generate it in real time -- is reshaping how we think about musical instruments and who gets to make music.",
+        body: "Blob Opera is a clear example of machine learning being used as part of an interactive instrument. It lowers the barrier to exploring vocal range and harmony, but it should not be treated as evidence for every claim about modern voice AI. Broader topics such as neural vocoders, accessibility tools, and production software involve different systems and need their own sources.",
       },
     ],
   },
@@ -78,8 +78,8 @@ const articles: ArticleContent[] = [
   {
     meta: {
       slug: "real-time-vocal-synthesis",
-      title: "Real-Time Vocal Synthesis in Your Browser: How It Works",
-      description: "Explore real-time vocal synthesis in web browsers, from latency constraints to neural network optimization and Web Audio API integration.",
+      title: "Real-Time Vocal Synthesis in a Browser: What We Know",
+      description: "Learn what Google publicly confirms about Blob Opera's responsive browser experience, without assigning undocumented technology to the project.",
       category: "ai-music",
       readingTime: 7,
       publishedAt: "2026-07-09",
@@ -90,22 +90,22 @@ const articles: ArticleContent[] = [
       {
         heading: "The Browser as a Real-Time Audio Platform",
         headingLevel: 2,
-        body: "Web browsers were never designed for real-time audio synthesis. They were built to display documents and play back pre-recorded media files. The fact that Blob Opera can run a neural network that generates singing voices with imperceptible latency is a testament to how far browser technology has come. Modern browsers support the Web Audio API, which provides a high-precision audio processing graph capable of generating and manipulating audio at sample rates of 44,100 Hz or higher. Combined with WebGL for GPU acceleration and WebAssembly for near-native computation speed, the browser has become a surprisingly capable platform for audio AI.",
+        body: "Modern browsers can schedule, generate, process, and play audio through standardized web technologies. Blob Opera uses what Google calls the latest web-audio technology and responds to gestures in real time. Google has discussed WebAssembly SIMD for a separate, optimized 16-blob performance used at Google I/O, but that statement should not be used to claim that every public version has the same architecture.",
       },
       {
         heading: "The Latency Challenge",
         headingLevel: 2,
-        body: "Latency is the single biggest obstacle in real-time vocal synthesis. For an interactive music experience, the delay between a user's action and the audible response must be under roughly 20 milliseconds -- the threshold at which humans perceive audio as instantaneous. Achieving this in a browser means the neural network must generate audio frames faster than they need to be played. This requires aggressive optimization: quantizing model weights from 32-bit floating point to lower precision, pruning unnecessary network connections, and using specialized inference engines designed for low-power devices.",
+        body: "Interactive audio feels convincing only when sound follows a gesture quickly and consistently. Delay can come from input handling, model computation, audio buffering, device drivers, and output hardware. Techniques such as model compression or smaller buffers exist in the wider field, but Google has not publicly said that Blob Opera uses a particular quantization, pruning, or inference strategy.",
       },
       {
         heading: "Neural Network Optimization for Real-Time Use",
         headingLevel: 2,
-        body: "The architecture of the neural network matters enormously for real-time performance. Blob Opera uses a type of model that generates audio one sample at a time, each conditioned on all previous samples. While this produces remarkably natural sound, it is computationally expensive. The team made several critical innovations: they reduced the model's receptive field, used dilated convolutions efficiently, and applied distillation techniques where a smaller model is trained to mimic a larger one. The result is a model that produces studio-quality vocal synthesis while running entirely on consumer hardware.",
+        body: "David Li publicly identified the singing model as a convolutional neural network. That is the safe level of architectural detail available from the project's own account. There is no official statement that the public experiment generates audio one sample at a time or uses dilated convolutions, receptive-field reduction, or distillation. Those ideas are relevant to other audio models, but attributing them to Blob Opera would be speculation.",
       },
       {
         heading: "Why Browser-Based Synthesis Matters",
         headingLevel: 2,
-        body: "Running AI voice synthesis in the browser rather than on a server has profound implications for accessibility and privacy. There is no server round-trip, which eliminates network latency entirely. There are no API costs or usage limits -- the model runs entirely on the user's device. No audio data leaves the user's machine, which means privacy-sensitive users can experiment without concern. This architecture also means the experience degrades gracefully: users with more powerful devices get higher-fidelity audio, while older hardware still produces musical results. It is a model of inclusive AI deployment.",
+        body: "A browser interface removes the need to install specialist music software, but an embedded third-party experience still loads resources from its host and remains subject to that provider's privacy practices. Users should not assume that no network request occurs simply because the controls feel immediate. The reliable accessibility claim is narrower: the experiment is playable in a supported browser and was designed for people regardless of musical skill.",
       },
     ],
   },
@@ -113,8 +113,8 @@ const articles: ArticleContent[] = [
   {
     meta: {
       slug: "from-recordings-to-ai-voice",
-      title: "From 16 Hours of Recordings to an AI Voice Model",
-      description: "A detailed look at how professional opera recordings become training data for an AI voice model — from studio sessions to spectral analysis and neural network training.",
+      title: "The 16 Hours of Singing Behind Blob Opera",
+      description: "A sourced account of the four opera singers, the recording sessions, and the limited technical details Google has published.",
       category: "ai-music",
       readingTime: 9,
       publishedAt: "2026-07-18",
@@ -125,27 +125,27 @@ const articles: ArticleContent[] = [
       {
         heading: "The Recording Sessions",
         headingLevel: 2,
-        body: "The journey from human voice to AI model begins in a professional recording studio. For Blob Opera, four singers were chosen to represent the four standard operatic voice types. Each singer spent multiple sessions in a controlled acoustic environment, singing through their full vocal range. They sang sustained notes at specific pitches, transitions between notes, and short melodic phrases. The recordings covered multiple vowel shapes at each pitch and included both straight tone (without vibrato) and natural vibrato at various speeds and depths.",
+        body: "Google selected four professional performers for the voice types represented in the experiment: tenor Christian Joel, bass Frederick Tong, mezzo-soprano Joanna Gamble, and soprano Olivia Doutney. Google's project story says the singers worked alone in the studio for hours and described the supplied material as parts of opera written on one note, sung across a range of pitches. Together the sessions produced 16 hours of singing.",
       },
       {
         heading: "Labeling and Annotation",
         headingLevel: 2,
-        body: "Raw audio is just noise until it is labeled with meaningful metadata. Each recording was meticulously annotated with the singer's voice type, the target pitch and octave, the vowel being sung, and expressive details like vibrato depth and dynamic level. This annotation process is crucial because it tells the neural network what to learn: the model learns to associate specific acoustic patterns with specific musical intentions. Without careful labeling, the model would have no way to distinguish between a tenor singing an 'ah' at middle C and a soprano singing an 'ee' at a high C.",
+        body: "The public accounts mention a map of sound containing elements such as vowels, consonants, and different notes. They do not publish the files, labels, annotation process, or licensing terms as a reusable dataset. It is therefore accurate to say the recordings covered vocal material used for learning, but not to invent a detailed metadata schema.",
       },
       {
         heading: "Spectral Analysis and Feature Engineering",
         headingLevel: 2,
-        body: "Before training begins, the labeled audio undergoes spectral analysis. A Fourier transform converts each window of audio into a frequency-domain representation called a spectrogram. From these spectrograms, engineers extract features like the fundamental frequency contour, formant frequencies (the resonant peaks that define vowel quality), and mel-frequency cepstral coefficients. These features capture the essential characteristics of the human voice while discarding irrelevant information, making the learning problem more tractable for the neural network.",
+        body: "Audio machine-learning projects often transform recordings into representations that make useful patterns easier to learn. Spectrograms, pitch contours, and other acoustic features are common across the field. Google has not said which of those representations Blob Opera used, so they are useful background concepts rather than confirmed parts of this project's pipeline.",
       },
       {
         heading: "Training the Neural Network",
         headingLevel: 2,
-        body: "With the processed data in hand, the actual training begins. The neural network is fed pairs of inputs (target pitch, vowel, voice type, desired expression) and outputs (the corresponding audio features). Over thousands of training steps, the model's internal weights are adjusted to minimize the difference between its predicted audio and the real recording. This process typically runs on powerful GPU hardware and can take days or weeks to converge. The goal is not to memorize specific recordings but to learn a general function that maps any combination of control parameters to realistic audio.",
+        body: "David Li's published explanation says the 16 hours were fed into a convolutional neural network, which learned to reproduce each voice type based on what it heard. The official experiment page adds that listeners hear the model's understanding rather than the original voices. Training duration, hardware, loss functions, and input-output representation have not been publicly specified.",
       },
       {
         heading: "Fine-Tuning for Natural Expression",
         headingLevel: 2,
-        body: "The initial trained model produces audio that is technically correct but may sound robotic or unnatural. Fine-tuning addresses this by exposing the model to more subtle aspects of vocal performance. Techniques like perceptual loss functions penalize the model not just for mathematical inaccuracy but for sounding unnatural to human ears. Generative adversarial training pushes the generator to produce increasingly realistic sound by learning to distinguish between real recordings and model output.",
+        body: "The final experience demonstrates that the trained system can connect pitch and vowel controls to a recognizable opera-inspired result. It does not reveal whether the team used adversarial training, perceptual losses, or a separate fine-tuning stage. Those methods belong in a general survey of audio generation unless a project source confirms their use.",
       },
     ],
   },
@@ -154,7 +154,7 @@ const articles: ArticleContent[] = [
     meta: {
       slug: "the-harmony-engine",
       title: "The Harmony Engine: How AI Creates Four-Part Harmony in Real Time",
-      description: "Learn how Blob Opera's harmony engine uses AI and music theory to generate natural-sounding four-part vocal harmony in real time.",
+      description: "Learn what Google confirms about Blob Opera's second model, which lets the other voices respond and harmonize in real time.",
       category: "ai-music",
       readingTime: 8,
       publishedAt: "2026-07-18",
@@ -165,22 +165,22 @@ const articles: ArticleContent[] = [
       {
         heading: "Why Harmony Is Harder Than Melody",
         headingLevel: 2,
-        body: "Generating a single singing voice is challenging enough, as the previous articles have shown. But Blob Opera adds another layer of complexity: it generates four voices simultaneously that must sound good together. This is the problem of harmonization, and it requires a fundamentally different type of intelligence. Where the individual voice models learn to produce realistic singing, the harmony engine must understand music theory -- specifically, the rules of four-part harmony that composers have followed for centuries. It must decide what notes the other three voices should sing at every moment to create a pleasing chord.",
+        body: "Blob Opera combines four represented voice types in one responsive ensemble. Google says the team created two models: one taught the computer to sing and another taught it to harmonize. The official experiment page describes the second model as letting the blobs respond to and harmonize a user's input in real time. It does not publish a rule set or training corpus for that model.",
       },
       {
         heading: "How the Engine Monitors Your Input",
         headingLevel: 2,
-        body: "When you drag one blob to play a melody, you are designating that voice as the lead. The harmony engine continuously monitors the pitch and vowel you are playing, then computes what the other three voices should sing. It operates on a tight loop, typically evaluating and updating the harmony several times per second. The engine must account for the current harmonic context -- what chord was just played, what chord is coming next, and whether the transition between them sounds smooth. A sudden harmonic shift might be technically correct but musically jarring.",
+        body: "When you move a blob, the remaining voices react around that input. This is why one gesture can sound like a coordinated group rather than four unrelated tones. Describing the audible result does not tell us how often the system updates, whether it predicts future chords, or which musical features it evaluates internally; those details are not in Google's public account.",
       },
       {
         heading: "Voice Leading Principles",
         headingLevel: 2,
-        body: "Voice leading is the art of moving multiple voices from one chord to the next with minimal motion. In traditional four-part harmony, each voice should move as little as possible between successive chords. The Blob Opera harmony engine implements these principles computationally. When you change the lead voice's note, the engine searches through possible voicings for the other three voices, preferring solutions where each voice moves by a small interval and stays within its comfortable range. The bass generally moves in larger intervals than the upper voices, maintaining its traditional role as the harmonic foundation.",
+        body: "Voice leading is the study of how individual musical lines move while forming harmony together. Small, singable movements are common, but real music uses many styles and exceptions. Blob Opera can prompt a listener to notice these relationships. Google has not stated that its harmony model performs a rule-based search or follows a specific textbook treatment of four-part writing.",
       },
       {
         heading: "Why It Sounds Musical, Not Mechanical",
         headingLevel: 2,
-        body: "Strictly following harmonic rules would produce technically correct but sterile-sounding music. The magic of the harmony engine is that it includes a dose of controlled spontaneity. The engine occasionally picks unexpected chord voicings -- a suspended chord where a major would be theoretically correct, or a slightly delayed voice entry that creates anticipation. These musical imperfections make the output sound human and alive. Combined with the natural expressivity of the neural voice models, the result feels collaborative rather than calculated.",
+        body: "The experience feels collaborative because the user's gesture and the model's response are heard together. Listeners may describe some results as expected, surprising, stable, or tense, but those impressions should not be turned into undocumented claims about controlled randomness, delayed entries, or the model selecting a particular chord type.",
       },
     ],
   },
@@ -200,7 +200,7 @@ const articles: ArticleContent[] = [
       {
         heading: "Why Voice Types Matter",
         headingLevel: 2,
-        body: "Voice typing is not about labeling singers as better or worse -- it is about understanding the natural instrument each person possesses. Every voice has a comfortable range where it sounds best, and different voice types excel at different musical roles. In choral and operatic music, these roles are well-defined: the bass provides depth and foundation, the tenor carries soaring melodies, the mezzo-soprano adds warmth and color, and the soprano delivers brilliance and emotional intensity. Understanding these four types is the first step to appreciating how vocal harmony works.",
+        body: "Voice typing is not about labeling singers as better or worse. It describes qualities such as comfortable range, timbre, and tessitura, and professional classification is more nuanced than a single pitch chart. Blob Opera represents four categories: bass, tenor, mezzo-soprano, and soprano. Opera also includes other classifications, including baritone and contralto, so these four are an introduction rather than a complete system.",
       },
       {
         heading: "Bass: The Foundation",
@@ -255,7 +255,7 @@ const articles: ArticleContent[] = [
       {
         heading: "Learning by Doing",
         headingLevel: 2,
-        body: "The best way to understand harmony is to experience it firsthand. Try this in Blob Opera: play only the soprano blob with a simple, slow melody and listen to how the other three voices respond. You are hearing real-time harmonization at work. Next, play two blobs at once, moving them in opposite directions, and notice how the harmony quality changes. Finally, play all four together and slowly drag one blob -- the harmony engine keeps everything musical, but you can hear how a single changed note alters the entire chord's character.",
+        body: "The best way to explore harmony here is to control one blob with a slow line and listen to how the other voices respond. Repeat the same shape in a different register and compare the result. The experiment's second model harmonizes the input in real time, but Google does not publish the exact rules or chord vocabulary it learned.",
       },
     ],
   },
@@ -280,12 +280,12 @@ const articles: ArticleContent[] = [
       {
         heading: "How AI Replicates Vibrato",
         headingLevel: 2,
-        body: "One of the most impressive achievements of Blob Opera's AI is its ability to generate natural vibrato. Because the model was trained on real opera singers, it learned the characteristic vibrato patterns of each voice type. A bass vibrato is slightly slower and wider than a soprano vibrato, and the model captures these nuances. When you hold a blob steady at a fixed position, the AI generates a steady tone with natural vibrato -- not a pre-recorded loop, but a continuously generated oscillation that sounds alive.",
+        body: "Blob Opera's sustained tones have an opera-inspired character that can be used to start a listening discussion about vibrato. Google confirms that the voice model learned from professional singers, but it does not claim that the system reproduces a documented vibrato rate for each voice type. Listen for pitch movement, then compare it with recordings of real singers rather than treating the experiment as a measurement tool.",
       },
       {
         heading: "Why Vibrato Matters for Natural Sounding Synthesis",
         headingLevel: 2,
-        body: "Vibrato is one of the most important cues the human ear uses to distinguish a natural voice from a synthetic one. A completely steady pitch sounds robotic and inhuman. By adding appropriate vibrato -- with the right speed, depth, and variation for each voice type and musical context -- the AI crosses the uncanny valley of vocal synthesis. This is why Blob Opera sounds charming and warm rather than mechanical.",
+        body: "Vibrato is one of several cues that shape a sustained singing tone, alongside breath, resonance, articulation, and changing dynamics. A steady pitch is not automatically inhuman: singers also use straight tone deliberately. Blob Opera offers an approachable example of stylized vocal sound, not a complete model of healthy singing technique.",
       },
     ],
   },
@@ -310,12 +310,12 @@ const articles: ArticleContent[] = [
       {
         heading: "The 'Ah' Vowel: Open and Bright",
         headingLevel: 2,
-        body: "The 'ah' vowel is produced with a low tongue position, a relaxed jaw, and slightly rounded lips. Acoustically, this creates a high first formant and a relatively high second formant. The result is a bright, open, carrying sound that projects well. In opera, 'ah' is the most common singing vowel because it produces the richest, most resonant tone. When you drag a blob to the left in Blob Opera, you are shaping the vowel toward 'ah' -- the sound becomes brighter and more operatic.",
+        body: "An 'ah' vowel is generally produced with a more open mouth shape than an 'oo' vowel, although exact tongue and jaw positions vary by language, singer, and pitch. Its formant pattern gives it a recognizably open quality. Blob Opera lets horizontal or depth-oriented movement change vowel color; the safest way to learn the direction in the current version is to move slowly and listen.",
       },
       {
         heading: "The 'Oo' Vowel: Rounded and Mellow",
         headingLevel: 2,
-        body: "The 'oo' vowel is produced with a high back tongue position and rounded, pursed lips. The acoustic result is dramatically different: both formants are low, producing a darker, rounder, more mellow sound with less high-frequency energy. In Blob Opera, dragging a blob to the right shapes the vowel toward 'oo' -- the sound becomes softer, warmer, and more intimate. This is why the same blob singing the same pitch can feel dramatically different depending on where you place it.",
+        body: "An 'oo' vowel normally involves lip rounding and a high back tongue position, producing a lower formant pattern than an open 'ah'. In Blob Opera, changing the non-pitch direction changes the vowel sound while the vertical position controls pitch. The visual direction can be described as forward and backward in Google's guide, even though a flat screen may make it feel horizontal.",
       },
       {
         heading: "Practical Exercises",
@@ -345,7 +345,7 @@ const articles: ArticleContent[] = [
       {
         heading: "1. Blob Opera: Harmony and Voice Types",
         headingLevel: 3,
-        body: "Blob Opera is arguably the most effective tool for introducing vocal harmony to students of any age. Each blob represents one of the four standard voice types, and the automatic harmony engine ensures that any combination of notes sounds musical. For a 45-minute lesson, start by having students identify each voice type. Then ask them to play two blobs and describe how the combination feels. Finally, have the class create a group composition with different students controlling different blobs.",
+        body: "Blob Opera can introduce four represented voice types and the idea of responsive harmony. In a short lesson, ask students to identify the register of each blob, control one voice at a time, and describe how the other three respond. End by recording a brief class performance and discussing which observations came from listening and which came from the official project description.",
       },
       {
         heading: "2. Chrome Music Lab: Song Maker",
@@ -385,12 +385,12 @@ const articles: ArticleContent[] = [
       {
         heading: "Getting Started with Recording",
         headingLevel: 2,
-        body: "Blob Opera has a built-in recording feature that captures every drag, pitch change, and vowel shift as you play. It does not record audio directly -- instead, it saves a sequence of your interactions that can be perfectly replayed later. This means the recording preserves your entire performance with complete fidelity, reconstructed by the same AI model that generated it. To start, look for the red record button at the bottom left of the game screen.",
+        body: "Blob Opera includes a recording control for capturing a performance and playing it back. Google encourages users to record and share creations, but its public guide does not document the exact storage format or promise bit-for-bit reproduction. In the current interface, look for the recording controls inside the Google-hosted experiment.",
       },
       {
         heading: "Playback and Review",
         headingLevel: 2,
-        body: "Once you stop recording, you can play back your performance immediately. The blobs will replay every move you made -- not as a video recording, but as a live musical reenactment. This is a powerful learning tool: you can hear exactly what you created, identify sections to improve, and try again. The playback is identical to the original because it is generated by the same neural models using the same parameter sequence.",
+        body: "After stopping, use playback to review the shape of the performance. Listen for a clear beginning and ending, repeated gestures, and changes of register. The feature is useful for revision even without making assumptions about whether Google stores audio, gestures, or another internal representation.",
       },
       {
         heading: "Sharing Your Performance",
@@ -404,7 +404,7 @@ const articles: ArticleContent[] = [
     meta: {
       slug: "city-themes-preset-songs",
       title: "Exploring Blob Opera's City Themes and Preset Songs",
-      description: "A tour of Blob Opera's city themes and preset songs -- how to switch between London, New York, and Sydney backdrops and discover built-in musical compositions.",
+      description: "A sourced look at Blob Opera's holiday songs and later world-tour locations, which may change as Google updates the experiment.",
       category: "guides",
       readingTime: 5,
       publishedAt: "2026-07-14",
@@ -415,17 +415,17 @@ const articles: ArticleContent[] = [
       {
         heading: "More Than a Backdrop",
         headingLevel: 2,
-        body: "At the bottom right of the Blob Opera screen, a button lets you switch between city themes. Each theme transforms the visual backdrop: London with its iconic skyline, New York with its towering buildings, and Sydney with its harbor and Opera House. But these are not purely cosmetic changes. Each city theme includes a curated selection of preset songs that match the city's musical character, making each location feel like a distinct musical destination.",
+        body: "Blob Opera began as a holiday experiment with optional seasonal songs. Google later created a world-tour version and described locations including Cape Town, London, Mexico City, New York, Paris, and Seoul. The set of places visible in the hosted experience may change, so a fixed three-city list is not reliable.",
       },
       {
         heading: "How Preset Songs Work",
         headingLevel: 2,
-        body: "On the left side of the screen, a playlist button reveals the preset songs available for your selected city. These are pre-programmed musical pieces that the blobs can perform automatically. They are full performances demonstrating what the blobs are capable of. Selecting a preset song shows you how the AI handles different musical styles, tempos, and moods. You can start with a preset and then take over, modifying the blobs' positions to add your own interpretation.",
+        body: "Google's descriptions mention songs such as seasonal classics, 'Frère Jacques,' and 'La Bamba.' Presets demonstrate a prepared performance rather than revealing how the machine-learning models were trained. Controls and song availability belong to the Google-hosted interface and can be revised without this fan site changing.",
       },
       {
         heading: "Learning from Presets",
         headingLevel: 2,
-        body: "Each preset song is a masterclass in blob conducting. Watch how the preset moves the blobs -- which voices play the melody, how the harmony supports it, where the dynamic peaks and valleys occur. Pay attention to how presets use the full range of each blob, when they move multiple blobs simultaneously versus focusing on one voice, and how they create emotional arcs. These patterns are directly transferable to your own performances.",
+        body: "Use a preset as a listening reference: identify the highest and lowest parts, notice repeated gestures, and compare the prepared version with free play. Avoid treating the animation as a formal score or assuming that every visible movement maps to a documented composition rule.",
       },
     ],
   },
@@ -450,7 +450,7 @@ const articles: ArticleContent[] = [
       {
         heading: "Use Stepwise Motion",
         headingLevel: 2,
-        body: "The most memorable melodies in music history share a common characteristic: they mostly move by step (from one note to the adjacent note in the scale). Think of 'Somewhere Over the Rainbow' or 'Amazing Grace' -- these melodies predominantly use stepwise motion with occasional strategic leaps. In Blob Opera, try dragging a blob slowly up and down, focusing on smooth, connected movements. Large leaps are effective when used sparingly for emotional impact.",
+        body: "Many singable melodies combine stepwise motion with occasional leaps, but there is no single formula shared by every memorable tune. In Blob Opera, try a slow connected contour, repeat it, and then change one leap. Comparing the versions is more useful than treating a stylistic suggestion as a universal rule.",
       },
       {
         heading: "Pay Attention to Phrasing",
@@ -490,7 +490,7 @@ const articles: ArticleContent[] = [
       {
         heading: "Opera in the Digital Age",
         headingLevel: 2,
-        body: "Opera has always evolved with technology. The printing press made sheet music widely available. Recordings brought opera into homes. Cinemas broadcast live performances. And now, AI experiments like Blob Opera are making opera not just accessible but playable. You do not need to learn Italian or read music to experience what it feels like to shape a vocal line. This is not opera's replacement -- it is opera's next evolution, opening the door for a new generation to discover an art form over four centuries old.",
+        body: "Opera has repeatedly reached audiences through new media, from printed scores and recordings to radio, cinema, and streaming. Blob Opera is an opera-inspired interactive experiment, not opera itself and not a replacement for live singers, dramatic storytelling, or stagecraft. It can nevertheless give a new listener a playful reason to explore vocal range and ensemble sound.",
       },
     ],
   },
@@ -520,7 +520,7 @@ const articles: ArticleContent[] = [
       {
         heading: "The Romantic Century: Verdi and Wagner",
         headingLevel: 2,
-        body: "The 19th century was opera's golden age. Verdi wrote emotionally direct, melodically unforgettable works like La Traviata and Aida. Wagner pioneered the concept where music, poetry, and staging all serve the drama equally. Romantic opera pushed vocal technique to its limits, demanding singers with extraordinary range and power. It is this tradition of vocal virtuosity that the AI models in Blob Opera draw upon.",
+        body: "The 19th century produced enduring repertory by composers including Verdi and Wagner and expanded the scale and expressive demands of many opera productions. Blob Opera pays tribute to the singing voice, but Google does not say that its models were trained on the works of a particular historical composer or school.",
       },
       {
         heading: "Modern Opera and the Future",
@@ -550,7 +550,7 @@ const articles: ArticleContent[] = [
       {
         heading: "AI as Collaborator, Not Replacement",
         headingLevel: 2,
-        body: "Blob Opera gets the role of AI exactly right. The AI handles the hard parts -- generating realistic voices, computing harmonies, maintaining musical structure -- while the human makes all the creative decisions. You are the conductor, the AI is your orchestra. This collaboration model is far more interesting than either fully automated music generation (which removes the human) or fully manual tools (which exclude non-musicians). It suggests a future where AI tools expand creative access rather than diminish it.",
+        body: "Blob Opera divides control between a person and two trained systems. The person supplies gestures; one model produces opera-inspired voices and another harmonizes the input. It is reasonable to describe the result as collaboration, but not to claim that the human makes every musical decision: the harmony response is part of the model's contribution.",
       },
       {
         heading: "Emotional Design Through Character",
@@ -581,7 +581,7 @@ const articles: ArticleContent[] = [
       {
         heading: "What Is a Vocoder?",
         headingLevel: 2,
-        body: "The term 'vocoder' dates back to the 1930s, long before AI was a field. Original vocoders analyzed incoming speech, broke it down into frequency bands, and used those measurements to modulate a carrier signal. The result was the classic robotic voice effect heard in countless songs. A neural vocoder does something conceptually similar but radically different: instead of using fixed filters and carrier signals, it uses a deep neural network trained on real human voices to generate audio that sounds natural rather than mechanical.",
+        body: "The term 'vocoder' predates modern machine learning. Traditional vocoders analyze characteristics of one signal and apply them to another, while the modern phrase 'neural vocoder' usually refers to a trained model that converts an acoustic representation into a waveform. Different systems use different architectures, and the term should not be applied to a project unless its documentation supports it.",
       },
       {
         heading: "WaveNet: The Breakthrough",
@@ -591,12 +591,12 @@ const articles: ArticleContent[] = [
       {
         heading: "How Neural Vocoders Generate Audio in Real Time",
         headingLevel: 2,
-        body: "The challenge with WaveNet-style models is that generating audio one sample at a time is computationally expensive. A single second of CD-quality audio requires 44,100 sample predictions. To make this practical for real-time use, researchers developed several optimizations: parallel WaveNet (which generates multiple samples simultaneously using probability distillation), and lightweight architectures that reduce the model size while maintaining quality. Blob Opera uses a highly optimized version of this technology, generating opera-quality singing voices in the browser with minimal latency.",
+        body: "WaveNet-style autoregressive generation can be computationally expensive because later samples depend on earlier ones. Researchers have developed parallel and lightweight alternatives. These facts provide background for neural audio research, but Google has not identified Blob Opera as a WaveNet or neural-vocoder implementation. Its published description names a convolutional neural network without specifying this generation method.",
       },
       {
         heading: "Why Vocoder Quality Matters for AI Voice",
         headingLevel: 2,
-        body: "The quality of the vocoder is the single biggest factor in whether an AI voice sounds natural or robotic. A good neural vocoder captures not just pitch and volume but also the subtle characteristics that make a voice human: breathiness at the edges of phrases, the slight roughness in a powerful note, the natural variation in timbre that prevents the voice from sounding like the same sample looped over and over. This is what separates Blob Opera from earlier singing synthesis tools — the vocoder quality is high enough that the blobs sound charming rather than creepy.",
+        body: "Waveform generation is one factor in perceived voice quality, alongside data, controls, acoustic representation, timing, and artistic design. Blob Opera's charm also comes from its characters and forgiving interaction. Because the project does not publicly identify a vocoder, its sound should be discussed without attributing quality to an undocumented component.",
       },
     ],
   },
@@ -621,12 +621,12 @@ const articles: ArticleContent[] = [
       {
         heading: "The Physics of a Pitch Glide",
         headingLevel: 2,
-        body: "When a singer executes a portamento, their vocal folds continuously change tension while maintaining phonation. The result is a steady stream of sound whose fundamental frequency sweeps across the frequency spectrum. The rate of the sweep, the smoothness of the transition, and whether the slide is even or accelerates toward the target note all affect the emotional quality. A linear sweep sounds mechanical; a slightly curved sweep with a natural deceleration toward the target sounds warm and human. These subtle nonlinearities are exactly what Blob Opera's AI model learned from real recordings.",
+        body: "During portamento, a singer maintains sound while pitch travels between notes. The rate and shape of that movement affect how the gesture is perceived. Blob Opera lets a player move continuously through pitch, but Google's public materials do not isolate portamento as a separately measured training target.",
       },
       {
         heading: "Why Portamento Is a Test of AI Voice Quality",
         headingLevel: 2,
-        body: "Generating convincing portamento is one of the hardest challenges for a singing AI. A poor model produces a staircase effect — discrete pitch steps rather than a continuous glide. A good model, like the one in Blob Opera, produces a smooth, natural-sounding slide. When you drag a blob quickly from a low to a high position, you are hearing the model demonstrate its mastery of portamento: the pitch sweeps continuously, the vowel transitions naturally, and the result sounds like a real voice rather than a series of sampled notes stitched together.",
+        body: "A continuous control can reveal whether an interactive instrument moves smoothly or in audible steps. Try a slow vertical gesture in Blob Opera and describe what you hear. That listening exercise does not prove which synthesis method is used or whether the model represents portamento in the same physiological way as a singer.",
       },
     ],
   },
@@ -656,12 +656,12 @@ const articles: ArticleContent[] = [
       {
         heading: "From Rules to Machine Learning",
         headingLevel: 2,
-        body: "Early algorithmic composition systems were rule-based — a programmer explicitly coded the rules of harmony, rhythm, and structure. The results were technically competent but rarely moving. The shift to machine learning changed everything. Instead of being told the rules, modern AI systems learn them from data. A neural network trained on thousands of hours of music internalizes patterns of harmony, phrasing, and expression that even expert musicians struggle to articulate. This is what powers Blob Opera: the AI did not learn harmonic rules from a textbook; it learned them by analyzing real music.",
+        body: "Many early computer-music systems used explicitly programmed rules, while modern machine-learning systems can learn statistical patterns from examples. Google confirms that Blob Opera uses a second model for harmonization, but it does not publish whether that model learned from scores, audio, rules, or another representation. The broader history helps frame the experiment without filling that gap with speculation.",
       },
       {
         heading: "Where Blob Opera Fits in This History",
         headingLevel: 2,
-        body: "Blob Opera represents an important milestone in algorithmic composition. Unlike fully automated systems that generate music without human input (which often feel impersonal), Blob Opera creates a collaborative loop: the human makes all the creative decisions, and the AI handles the technical execution. This is closer to Mozart's dice game than to modern AI art generators — the human remains in control, and the algorithm is a tool, not a replacement. It suggests a future where algorithmic composition amplifies human creativity rather than substituting for it.",
+        body: "Blob Opera creates a responsive loop: a person chooses gestures while trained models produce voices and harmony. It is better described as an interactive instrument than as a system that autonomously composes a complete opera. Comparisons with historical chance music or modern generators can be useful, but they are interpretations rather than claims made by the creators.",
       },
     ],
   },
@@ -686,12 +686,12 @@ const articles: ArticleContent[] = [
       {
         heading: "The Power of Expectation and Surprise",
         headingLevel: 2,
-        body: "The brain processes music by constantly predicting what comes next. When the prediction is correct, we feel a sense of satisfaction. When it is slightly wrong in a pleasing way, we feel delight. This balance between expectation and surprise is the key to musical enjoyment. A piece that is entirely predictable is boring; one that is entirely unpredictable is unpleasant. The sweet spot — where the music is recognizable enough to generate expectations but novel enough to occasionally defy them — is where most great music lives. Blob Opera's charm stems partly from this balance: the harmony engine follows familiar rules, but your spontaneous choices keep the outcome fresh.",
+        body: "Expectation is one important idea in music cognition, but enjoyment varies across listeners, cultures, familiarity, and context. Blob Opera creates a mixture of user choice and model response that may feel predictable at one moment and surprising at another. The creators have not published a psychological study proving that this mechanism explains the experiment's popularity.",
       },
       {
         heading: "Why Major and Minor Sound Different",
         headingLevel: 2,
-        body: "The distinction between major and minor is more than cultural convention — it has acoustic and physiological roots. Major chords contain a major third interval, whose frequency ratio of 5:4 sits comfortably in the harmonic series. Minor chords use a minor third (6:5 ratio), which produces a slightly more complex, less 'pure' sound. The brain processes these differently, and cross-cultural studies suggest that the association of major with happy and minor with sad, while not universal, appears with remarkable consistency across many musical traditions. When the harmony engine in Blob Opera chooses a chord, it is selecting from this acoustic palette of emotional possibilities.",
+        body: "In common-practice Western music, major and minor triads differ in the quality of the third above the root. Simple ratios such as 5:4 and 6:5 describe just-intonation versions, while equal-tempered instruments use approximations. Emotional associations with major and minor are strongly shaped by musical and cultural context. Google has not published Blob Opera's chord vocabulary or tuning decisions.",
       },
     ],
   },
@@ -716,12 +716,12 @@ const articles: ArticleContent[] = [
       {
         heading: "How the Body Controls Loudness",
         headingLevel: 2,
-        body: "Loudness in singing is primarily controlled by breath pressure and vocal fold resistance. To sing softly, the singer maintains gentle airflow while keeping the vocal folds loosely adducted (close together). To sing loudly, the singer increases breath support while firmly adducting the folds, allowing them to resist more air pressure before releasing. The interaction between these systems is delicate: too much air pressure with loose folds produces a breathy, unsupported sound; too little air with tight folds produces a squeezed, strained tone. Blob Opera's AI model learned these relationships from real recordings, which is why the blobs can produce both gentle, breathy tones and powerful, resonant notes.",
+        body: "Singers change loudness through coordinated airflow, vocal-fold behavior, resonance, and articulation. The relationship is complex and should not be reduced to a single instruction for vocal technique. Blob Opera learned from professional recordings, but Google does not say that it explicitly models breath pressure or vocal-fold resistance.",
       },
       {
         heading: "Dynamic Contrast in Blob Opera",
         headingLevel: 2,
-        body: "While Blob Opera does not have an explicit volume control, you can influence dynamics through interaction speed and position. Quick, decisive movements tend to produce more energetic, forceful transitions, while slow, gentle movements create softer, more delicate effects. The height of your drag also affects the vocal effort in the model — higher notes naturally involve more vocal fold tension, producing a more intense quality. To create a dynamic arc in your Blob Opera performance, try starting with gentle, low movements, building to faster, higher gestures for the climax, and then tapering back to quiet, slow movements for the resolution.",
+        body: "Blob Opera's documented controls change pitch and vowel sound; Google does not document gesture speed as a volume control. You can still create a perceived arc by changing register, pace, repetition, and density, but that is a compositional suggestion rather than a claim about the model simulating vocal effort.",
       },
     ],
   },
@@ -746,7 +746,7 @@ const articles: ArticleContent[] = [
       {
         heading: "Why Collaboration Matters More Than Automation",
         headingLevel: 2,
-        body: "Fully automated music generation faces a fundamental problem: without a human making choices, there is no intentionality behind the output. A randomly generated melody has no expressive purpose; it is just sound. Blob Opera solves this by giving the human real-time control over every aspect of the performance while the AI handles the execution. This division of labor is powerful: the AI never makes a creative decision, so every note feels intentional. The result is genuinely expressive in a way that fully automated systems cannot achieve, while remaining accessible to people without musical training.",
+        body: "Blob Opera gives the player immediate control over gestures while its models contribute vocal output and harmony. The player does not control every generated note, and it is a philosophical overreach to declare that other generated music can have no expressive purpose. The defensible point is that this interface keeps a human action inside the feedback loop.",
       },
       {
         heading: "What Makes a Good Creative AI Tool",

@@ -44,8 +44,8 @@ export const siteConfig = {
     /** Aspect ratio of the embedded game, used to prevent CLS. */
     aspectRatio: "16 / 9",
 
-    /** Cover image shown on the idle/launch screen. Replace /public/cover.jpg. */
-    coverImage: "/cover.jpg",
+    /** Cover image shown before the Google-hosted experiment is loaded. */
+    coverImage: "/blob-desc-1.webp",
 
     /** Age rating for the game. */
     ageRating: "Everyone",
@@ -58,28 +58,18 @@ export const siteConfig = {
     /** Example recordings shown on the homepage gallery preview and used as seed data on /gallery. */
     examples: [
       {
-        title: "Happy Little Blobs",
-        submitterName: "MusicFan42",
+        title: "Example recording 1",
+        submitterName: "Site example",
         shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/B7dBMqWD3xDm",
       },
       {
-        title: "Bedtime Lullaby",
-        submitterName: "NightOwl",
+        title: "Example recording 2",
+        submitterName: "Site example",
         shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/I8MvPe4aHJpt",
       },
       {
-        title: "Dramatic Opera Scene",
-        submitterName: "OperaLover",
-        shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/h55g6isQi1XZ",
-      },
-      {
-        title: "Dramatic Opera Scene2",
-        submitterName: "OperaLover",
-        shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/h55g6isQi1XZ",
-      },
-      {
-        title: "Dramatic Opera Scene3",
-        submitterName: "OperaLover",
+        title: "Example recording 3",
+        submitterName: "Site example",
         shareLink: "https://gacembed.withgoogle.com/blob-opera#/r/h55g6isQi1XZ",
       },
     ],

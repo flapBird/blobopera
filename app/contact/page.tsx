@@ -21,7 +21,7 @@ export default function ContactPage() {
         to discuss a partnership, we would love to hear from you.
       </p>
 
-      <p className="text-text-dark/50 text-xs mb-8">
+      <p className="text-text-dark/70 text-xs mb-8">
         Note: This site is not affiliated with David Li, Google LLC, or
         Google Arts & Culture. For matters regarding the original Blob
         Opera game, please contact Google Arts & Culture directly.
@@ -36,15 +36,16 @@ export default function ContactPage() {
 
       {/* Email contact */}
       <div className="bg-surface rounded-xl p-6 border border-gray-100">
-        <p className="text-sm text-text-dark/60 mb-2">
+        <p className="text-sm text-text-dark/70 mb-2">
           Send your message to:
         </p>
-        <EmailLink email={siteConfig.contact.email} className="text-primary font-medium text-lg hover:underline">
-          {siteConfig.contact.email}
-        </EmailLink>
+        <EmailLink
+          email={siteConfig.contact.email}
+          className="text-primary font-medium text-lg hover:underline"
+        />
       </div>
 
-      <div className="mt-10 space-y-3 text-sm text-text-dark/50">
+      <div className="mt-10 space-y-3 text-sm text-text-dark/70">
         <p>
           <strong className="text-text-dark/70">Common topics we handle:</strong>
         </p>

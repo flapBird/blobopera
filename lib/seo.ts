@@ -5,9 +5,15 @@ interface PageSeoInput {
   title?: string;
   description?: string;
   path: string;
+  includeCanonical?: boolean;
 }
 
-export function buildMetadata({ title, description, path }: PageSeoInput): Metadata {
+export function buildMetadata({
+  title,
+  description,
+  path,
+  includeCanonical = true,
+}: PageSeoInput): Metadata {
   const isHome = path === "/";
   const pageTitle = isHome
     ? siteConfig.seo.title
@@ -21,7 +27,7 @@ export function buildMetadata({ title, description, path }: PageSeoInput): Metad
     metadataBase: new URL(siteConfig.domain),
     title: pageTitle,
     description: pageDescription,
-    alternates: { canonical },
+    ...(includeCanonical ? { alternates: { canonical } } : {}),
     openGraph: {
       title: pageTitle,
       description: pageDescription,

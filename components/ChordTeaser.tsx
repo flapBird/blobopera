@@ -29,7 +29,7 @@ export default function ChordTeaser() {
               {chord.quality}
             </span>
           </div>
-          <p className="text-xs text-text-dark/40 font-mono">{chord.notes}</p>
+          <p className="text-xs text-text-dark/70 font-mono">{chord.notes}</p>
         </div>
       ))}
     </div>

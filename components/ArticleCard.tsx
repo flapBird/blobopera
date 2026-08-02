@@ -16,7 +16,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
         <span className="text-xs font-medium text-primary bg-primary/5 px-2.5 py-0.5 rounded-full">
           {getCategoryLabel(article.category)}
         </span>
-        <span className="text-xs text-text-dark/40">
+        <span className="text-xs text-text-dark/70">
           {article.readingTime} min read
         </span>
       </div>
@@ -25,7 +25,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
         {article.title}
       </h3>
 
-      <p className="text-sm text-text-dark/60 leading-relaxed line-clamp-2">
+      <p className="text-sm text-text-dark/70 leading-relaxed line-clamp-2">
         {article.description}
       </p>
     </Link>

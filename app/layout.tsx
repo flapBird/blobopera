@@ -19,7 +19,7 @@ const quicksand = Quicksand({
   variable: "--font-quicksand",
 });
 
-export const metadata: Metadata = buildMetadata({ path: "/" });
+export const metadata: Metadata = buildMetadata({ path: "/", includeCanonical: false });
 
 export default function RootLayout({
   children,
@@ -34,7 +34,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
 
         {/* Google AdSense — injected globally when clientId is set */}
-        {siteConfig.ads.clientId && (
+        {siteConfig.ads.enabled && siteConfig.ads.clientId && (
           <script
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.ads.clientId}`}

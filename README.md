@@ -11,7 +11,7 @@ An independent fan site for Blob Opera, the AI-powered singing experiment by Dav
 ## Features
 
 
-### Educational Articles (23 articles)
+### Educational Articles (21 articles)
 
 Four categories covering different aspects of vocal music and AI technology:
 
@@ -37,9 +37,12 @@ Each quiz has 5 questions with instant feedback and explanations. A results scre
 
 A Web Audio API-powered ear trainer. The browser generates pairs of tones (using oscillator nodes with attack/release envelopes) and asks the user to identify the interval. Covers six intervals from minor third to octave.
 
-### Recording Gallery
+### Personal Recording Links
 
-A community submission page where users can share their Blob Opera recording links with a title and description. Submissions are stored in localStorage and displayed in a grid of cards with cover images. A keyword-based moderation filter screens submissions for inappropriate content.
+A browser-local page where visitors can save validated Blob Opera recording
+links with a title and description. Entries stay on that device in
+`localStorage`; they are not uploaded or presented as public community
+submissions.
 
 ### Chord Builder
 
@@ -159,7 +162,7 @@ All site-wide settings are centralised here:
 
 ## Content
 
-The 23 articles live in `lib/articles.ts` as structured data. Each article has:
+The 21 articles live in `lib/articles.ts` as structured data. Each article has:
 
 - A unique slug, title, and description
 - A category (`ai-music`, `music-education`, `guides`, `music-appreciation`)
@@ -182,4 +185,6 @@ The Blob Opera game itself is the work of **David Li** and **Google Arts & Cultu
 - David Li for creating Blob Opera
 - Google Arts & Culture for hosting the experiment
 - The Google Creative Lab team behind the project
-- Christian Joel, Frederick Tong, Joanna Goldsmith-Eteson, and Elora Wesner — the four opera singers whose voices trained the AI model
+- Christian Joel (tenor), Frederick Tong (bass), Joanna Gamble
+  (mezzo-soprano), and Olivia Doutney (soprano) — the four opera singers
+  credited by Google Arts & Culture

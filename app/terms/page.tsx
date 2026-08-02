@@ -12,7 +12,7 @@ export const metadata = buildMetadata({
 export default function TermsPage() {
   return (
     <LegalPage title="Terms &amp; Conditions">
-      <p className="text-sm text-text-dark/50 mb-6">
+      <p className="text-sm text-text-dark/70 mb-6">
         These terms govern your use of {siteConfig.siteName} (
         {siteConfig.domain}). By using this site, you agree to the
         conditions outlined below. If you do not agree, please discontinue
@@ -126,9 +126,10 @@ export default function TermsPage() {
         <p>
           For questions about these Terms &amp; Conditions, please contact
           us at{" "}
-          <EmailLink email={siteConfig.contact.email} className="text-primary underline">
-            {siteConfig.contact.email}
-          </EmailLink>
+          <EmailLink
+            email={siteConfig.contact.email}
+            className="text-primary underline"
+          />
           .
         </p>
       </section>

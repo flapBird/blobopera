@@ -1,15 +1,14 @@
-"use client";
-
 interface EmailLinkProps {
   email: string;
   className?: string;
-  children?: React.ReactNode;
 }
 
-export default function EmailLink({ email, className = "", children }: EmailLinkProps) {
+export default function EmailLink({ email, className = "" }: EmailLinkProps) {
+  const [localPart, domain] = email.split("@");
+
   return (
     <span className={className}>
-      {children ?? email}
+      {localPart}<span>@</span>{domain}
     </span>
   );
 }

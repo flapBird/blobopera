@@ -53,7 +53,7 @@ export default function ImagePlaceholder({
         </div>
       )}
       {caption && (
-        <figcaption className="mt-2 text-center text-sm text-text-dark/50 italic">
+        <figcaption className="mt-2 text-center text-sm text-text-dark/70 italic">
           {caption}
         </figcaption>
       )}

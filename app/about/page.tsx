@@ -24,9 +24,9 @@ export default function AboutPage() {
         <p>
           Blob Opera was created by artist and creative coder David Li in
           collaboration with Google Arts & Culture. The project uses machine
-          learning trained on real opera recordings, so when you drag a blob
-          around the screen you are playing an AI instrument that understands
-          vibrato, vowel shaping, and expression.
+          learning trained on 16 hours of singing from four professional opera
+          singers. One model produces the represented voice types and a second
+          lets the quartet harmonize a player&apos;s input in real time.
         </p>
         <p>
           <strong>Important:</strong> {siteConfig.siteName} is an independent
@@ -37,12 +37,12 @@ export default function AboutPage() {
           trademarks and copyrights belong to their respective owners.
         </p>
         <p>
-          All games on {siteConfig.siteName} can be played for free directly
-          in the browser, with no downloads or registration required. We
+          The embedded experiment can be played for free directly in the
+          browser, with no download required by this site. We
           are committed to keeping the site fast, simple, and accessible so
           you can focus on what matters: making music.
         </p>
-        <p className="text-text-dark/50 text-sm pt-4 border-t border-gray-100">
+        <p className="text-text-dark/70 text-sm pt-4 border-t border-gray-100">
           Attribution: {siteConfig.game.sourceAttribution}. Visit the{" "}
           <a
             href="https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw"

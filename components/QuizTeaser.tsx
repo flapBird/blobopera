@@ -57,7 +57,7 @@ export default function QuizTeaser() {
                 <h3 className="font-heading font-bold text-base text-text-dark group-hover:text-primary transition-colors leading-snug">
                   {cat.label}
                 </h3>
-                <p className="text-sm text-text-dark/40 leading-snug">{cat.description}</p>
+                <p className="text-sm text-text-dark/70 leading-snug">{cat.description}</p>
               </div>
             </div>
           </Link>

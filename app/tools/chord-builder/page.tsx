@@ -244,8 +244,10 @@ export default function ChordBuilderPage() {
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-text-dark mb-3">
           Chord Builder
         </h1>
-        <p className="text-text-dark/60 max-w-2xl mx-auto text-base leading-relaxed">
-          Click notes to build chords and hear them with Web Audio. Learn how different intervals create consonance, dissonance, and everything in between.
+        <p className="text-text-dark/80 max-w-2xl mx-auto text-base leading-relaxed">
+          Click notes to build chords and hear simple synthesized tones. The
+          labels are a beginner-friendly guide; consonance and dissonance also
+          depend on tuning, musical style, voicing, and context.
         </p>
       </section>
 
@@ -271,14 +273,14 @@ export default function ChordBuilderPage() {
                   <span key={n.midi} className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary/5 text-primary rounded-lg text-sm font-heading font-semibold">
                     {n.note.replace("#", "\u266F")}{n.octave}
                     {idx < intervalLabels.length && (
-                      <span className="text-xs text-text-dark/40 ml-1">{intervalLabels[idx]}</span>
+                      <span className="text-xs text-text-dark/70 ml-1">{intervalLabels[idx]}</span>
                     )}
                   </span>
                 ))}
               </div>
             )}
             {sortedSelected.length === 0 && (
-              <p className="text-sm text-text-dark/40">Click on the keys below to start building a chord.</p>
+              <p className="text-sm text-text-dark/70">Click on the keys below to start building a chord.</p>
             )}
           </div>
 
@@ -297,7 +299,7 @@ export default function ChordBuilderPage() {
             </button>
             <button
               onClick={handleClear}
-              className="px-4 py-2.5 rounded-xl border-2 border-gray-200 text-text-dark/60 hover:border-gray-300 hover:text-text-dark font-heading font-semibold text-sm transition-colors"
+              className="px-4 py-2.5 rounded-xl border-2 border-gray-200 text-text-dark/70 hover:border-gray-300 hover:text-text-dark font-heading font-semibold text-sm transition-colors"
             >
               Clear All
             </button>
@@ -306,7 +308,7 @@ export default function ChordBuilderPage() {
               className={`px-4 py-2.5 rounded-xl border-2 font-heading font-semibold text-sm transition-colors ${
                 showLabels
                   ? "border-primary/30 text-primary bg-primary/5"
-                  : "border-gray-200 text-text-dark/60 hover:border-gray-300"
+                  : "border-gray-200 text-text-dark/70 hover:border-gray-300"
               }`}
             >
               Labels {showLabels ? "ON" : "OFF"}
@@ -318,7 +320,7 @@ export default function ChordBuilderPage() {
             <div className="min-w-[600px]">
               {OCTAVES.map((oct) => (
                 <div key={oct} className="mb-2">
-                  <p className="text-xs text-text-dark/30 font-heading font-semibold mb-1">Octave {oct}</p>
+                  <p className="text-xs text-text-dark/70 font-heading font-semibold mb-1">Octave {oct}</p>
                   <div className="flex gap-0.5">
                     {getNotesInOctave(oct).map((note) => {
                       const isSharp = note.note.includes("#");
@@ -348,7 +350,7 @@ export default function ChordBuilderPage() {
                           title={`${note.note}${note.octave} (${note.freq.toFixed(1)} Hz)`}
                         >
                           {showLabels && (
-                            <span className={`${isSharp ? "text-white/60" : "text-text-dark/30"} text-[10px] leading-none`}>
+                            <span className={`${isSharp ? "text-white/80" : "text-text-dark/70"} text-[10px] leading-none`}>
                               {note.note.replace("#", "\u266F")}
                             </span>
                           )}
@@ -371,26 +373,30 @@ export default function ChordBuilderPage() {
               <div className="p-3 rounded-xl bg-green-50 border border-green-200">
                 <span className="text-xs font-heading font-bold text-green-700">Consonant</span>
                 <p className="text-xs text-green-600/80 mt-1 leading-relaxed">
-                  Intervals that sound stable and pleasant together. Examples: major/minor thirds, perfect fifths, and sixths.
+                  Often treated as relatively stable in common-practice Western
+                  harmony, depending on tuning and context.
                 </p>
               </div>
               <div className="p-3 rounded-xl bg-amber-50 border border-amber-200">
                 <span className="text-xs font-heading font-bold text-amber-700">Mixed</span>
                 <p className="text-xs text-amber-600/80 mt-1 leading-relaxed">
-                  Intervals that can sound either stable or tense depending on context. Perfect fourths and sevenths fall here.
+                  A simplified label for sounds whose effect changes especially
+                  strongly with voicing and context.
                 </p>
               </div>
               <div className="p-3 rounded-xl bg-red-50 border border-red-200">
                 <span className="text-xs font-heading font-bold text-red-700">Dissonant</span>
                 <p className="text-xs text-red-600/80 mt-1 leading-relaxed">
-                  Intervals that create tension and a need for resolution. Tritones, seconds, and sevenths create this effect.
+                  Often treated as relatively tense in common-practice Western
+                  harmony; other musical traditions may hear or use them differently.
                 </p>
               </div>
             </div>
-            <p className="text-xs text-text-dark/40 mt-3 leading-relaxed">
-              This tool generates tones using the Web Audio API. Each note is a pure sine-triangle wave — real instruments
-              add overtones that make chords sound richer, but the underlying harmonic relationships are the same.
-              The harmony engine in Blob Opera uses these same principles to create its beautiful four-part harmonies.
+            <p className="text-xs text-text-dark/70 mt-3 leading-relaxed">
+              This independent tool uses Web Audio oscillators: triangle waves
+              for chords and sine waves for note previews. It is not part of
+              Blob Opera and does not reproduce Google&apos;s undisclosed
+              harmony-model implementation.
             </p>
           </div>
 

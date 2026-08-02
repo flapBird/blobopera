@@ -24,7 +24,7 @@ export default function ArticlesPage() {
     return (
       <div className="max-w-3xl mx-auto px-4 py-20 text-center">
         <h1 className="font-heading font-extrabold text-3xl text-text-dark mb-4">Articles</h1>
-        <p className="text-text-dark/50">Articles coming soon. Check back later.</p>
+        <p className="text-text-dark/70">Articles coming soon. Check back later.</p>
       </div>
     );
   }
@@ -34,7 +34,7 @@ export default function ArticlesPage() {
       <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-text-dark mb-2">
         Articles
       </h1>
-      <p className="text-text-dark/50 mb-10 max-w-2xl">
+      <p className="text-text-dark/70 mb-10 max-w-2xl">
         Read and learn about music, technology, and creativity.
       </p>
 

@@ -16,26 +16,26 @@ export default function Footer() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-text-dark/50 hover:text-primary transition-colors"
+              className="text-sm text-text-dark/70 hover:text-primary transition-colors"
             >
               {link.label}
             </Link>
           ))}
         </nav>
         <div className="text-center space-y-1">
-          <p className="text-xs text-text-dark/40">
+          <p className="text-xs text-text-dark/70">
             Blob Opera is a creation of{" "}
             <a
               href="https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-dark/50 hover:text-primary transition-colors underline"
+              className="text-text-dark/70 hover:text-primary transition-colors underline"
             >
               David Li &amp; Google Arts &amp; Culture
             </a>
             .
           </p>
-          <p className="text-xs text-text-dark/30">
+          <p className="text-xs text-text-dark/70">
             This is an independent fan site. We are not affiliated with or
             endorsed by Google LLC or David Li.
           </p>

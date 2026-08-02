@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import SidebarLayout from "@/components/SidebarLayout";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import { siteConfig } from "@/lib/site.config";
+import { getSafeBlobOperaRecordingUrl } from "@/lib/blob-opera-url";
 
 
 // ---------- types ----------
@@ -41,7 +42,14 @@ function loadSubmissions(): Submission[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return [];
-    return JSON.parse(raw) as Submission[];
+    const parsed = JSON.parse(raw) as Submission[];
+    if (!Array.isArray(parsed)) return [];
+    const savedByVisitor = parsed.filter(
+      (submission) =>
+        !submission.id?.startsWith("seed-") &&
+        Boolean(getSafeBlobOperaRecordingUrl(submission.shareLink)),
+    );
+    return [...savedByVisitor, ...generateSeedSubmissions()];
   } catch {
     return [];
   }
@@ -64,7 +72,7 @@ function generateSeedSubmissions(): Submission[] {
     description: "",
     shareLink: ex.shareLink || "",
     submitterName: ex.submitterName,
-    submittedAt: new Date(Date.now() - (examples.length - i) * 86400000).toISOString(),
+    submittedAt: "",
     approved: true,
   }));
 }
@@ -107,15 +115,19 @@ export default function GalleryPage() {
   useEffect(() => {
     const existing = loadSubmissions();
     if (existing.length === 0) {
-      // Seed with demo entries
-      saveSubmissions(generateSeedSubmissions());
-      setSubmissions(generateSeedSubmissions());
+      const seeds = generateSeedSubmissions();
+      saveSubmissions(seeds);
+      setSubmissions(seeds);
     } else {
       setSubmissions(existing);
     }
   }, []);
 
-  const approvedSubmissions = submissions.filter((s) => s.approved);
+  const approvedSubmissions = submissions.filter(
+    (submission) =>
+      submission.approved &&
+      Boolean(getSafeBlobOperaRecordingUrl(submission.shareLink)),
+  );
   const pendingCount = submissions.filter((s) => !s.approved).length;
 
   const handleInputChange = (
@@ -135,8 +147,8 @@ export default function GalleryPage() {
 
     // Validation
     const { title, description, shareLink, submitterName } = formData;
-    if (!title.trim() || !description.trim()) {
-      setFormError("Title and description are required.");
+    if (!title.trim() || !description.trim() || !shareLink.trim()) {
+      setFormError("Title, description, and a Blob Opera recording link are required.");
       return;
     }
     if (title.trim().length > 80) {
@@ -156,10 +168,10 @@ export default function GalleryPage() {
       );
       return;
     }
-    // Optional share link — skip moderation if empty
-    if (shareLink.trim() && !passesModeration(shareLink)) {
-      setModerationMsg(
-        "The share link appears to contain inappropriate content. Please provide a valid Blob Opera share link."
+    const safeShareLink = getSafeBlobOperaRecordingUrl(shareLink.trim());
+    if (!safeShareLink) {
+      setFormError(
+        "Use a valid https://gacembed.withgoogle.com/blob-opera#/r/... recording link.",
       );
       return;
     }
@@ -168,10 +180,10 @@ export default function GalleryPage() {
       id: `sub-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
       title: title.trim(),
       description: description.trim(),
-      shareLink: shareLink.trim(),
+      shareLink: safeShareLink,
       submitterName: submitterName.trim() || "Anonymous",
       submittedAt: new Date().toISOString(),
-      approved: true, // Auto-approved since we filter via keyword
+      approved: true,
     };
 
     const updated = [newSub, ...submissions];
@@ -191,23 +203,29 @@ export default function GalleryPage() {
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "WebPage",
-          name: "Blob Opera Recording Gallery",
-          description: "Share and discover Blob Opera recordings from the community.",
+          name: "Personal Blob Opera Recording Links",
+          description: "Save valid Blob Opera recording links in this browser.",
         }}
       />
 
       <section className="pt-10 pb-6 px-4 text-center">
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-text-dark mb-3">
-          Recording Gallery
+          Your Recording Links
         </h1>
-        <p className="text-text-dark/60 max-w-2xl mx-auto text-base leading-relaxed">
-          Share your Blob Opera creations and discover what others have made.
-          Got a recording you are proud of? Submit your unique share link to join the wall.
+        <p className="text-text-dark/80 max-w-2xl mx-auto text-base leading-relaxed">
+          Keep valid Blob Opera recording links in one place on this device.
+          This is a personal browser list, not a public community submission system.
         </p>
       </section>
 
       <SidebarLayout>
         <div className="space-y-8">
+          <div className="rounded-xl border border-secondary/30 bg-secondary/10 px-4 py-3 text-sm leading-6 text-text-dark/80">
+            Entries you add are saved only in this browser&apos;s local storage.
+            They are not uploaded, published, or reviewed by this site. The
+            example cards below are clearly labeled site examples.
+          </div>
+
           {/* Submit button / form */}
           {!showForm && (
             <div className="text-center">
@@ -215,7 +233,7 @@ export default function GalleryPage() {
                 onClick={() => setShowForm(true)}
                 className="px-8 py-3 bg-primary text-white rounded-xl font-heading font-bold text-sm hover:bg-primary/90 transition-colors"
               >
-                + Share Your Recording
+                + Save a Recording Link
               </button>
             </div>
           )}
@@ -223,10 +241,10 @@ export default function GalleryPage() {
           {showForm && (
             <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8 shadow-sm animate-fade-up">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="font-heading font-bold text-lg text-text-dark">Share Your Recording</h2>
+                <h2 className="font-heading font-bold text-lg text-text-dark">Save a Recording Link</h2>
                 <button
                   onClick={() => setShowForm(false)}
-                  className="text-sm text-text-dark/40 hover:text-text-dark transition-colors"
+                  className="text-sm text-text-dark/70 hover:text-text-dark transition-colors"
                 >
                   Cancel
                 </button>
@@ -234,10 +252,11 @@ export default function GalleryPage() {
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-heading font-semibold text-text-dark mb-1">
+                  <label htmlFor="recording-title" className="block text-sm font-heading font-semibold text-text-dark mb-1">
                     Title *
                   </label>
                   <input
+                    id="recording-title"
                     type="text"
                     name="title"
                     value={formData.title}
@@ -249,10 +268,11 @@ export default function GalleryPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-heading font-semibold text-text-dark mb-1">
+                  <label htmlFor="recording-description" className="block text-sm font-heading font-semibold text-text-dark mb-1">
                     Description *
                   </label>
                   <textarea
+                    id="recording-description"
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
@@ -264,24 +284,27 @@ export default function GalleryPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-heading font-semibold text-text-dark mb-1">
-                    Share Link (optional)
+                  <label htmlFor="recording-link" className="block text-sm font-heading font-semibold text-text-dark mb-1">
+                    Blob Opera Recording Link *
                   </label>
                   <input
+                    id="recording-link"
                     type="url"
                     name="shareLink"
                     value={formData.shareLink}
                     onChange={handleInputChange}
-                    placeholder="Paste your Blob Opera share link if you have one"
+                    placeholder="https://gacembed.withgoogle.com/blob-opera#/r/..."
+                    required
                     className="w-full px-4 py-2.5 rounded-xl border-2 border-gray-200 bg-white focus:border-primary focus:outline-none transition-colors text-sm"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-heading font-semibold text-text-dark mb-1">
+                  <label htmlFor="recording-name" className="block text-sm font-heading font-semibold text-text-dark mb-1">
                     Your Name (optional)
                   </label>
                   <input
+                    id="recording-name"
                     type="text"
                     name="submitterName"
                     value={formData.submitterName}
@@ -303,7 +326,7 @@ export default function GalleryPage() {
                   type="submit"
                   className="w-full sm:w-auto px-8 py-3 bg-primary text-white rounded-xl font-heading font-bold text-sm hover:bg-primary/90 transition-colors"
                 >
-                  Submit to Gallery
+                  Save on This Device
                 </button>
               </form>
             </div>
@@ -312,14 +335,14 @@ export default function GalleryPage() {
           {formSuccess && (
             <div className="bg-green-50 border border-green-200 rounded-2xl p-4 text-center animate-fade-up">
               <p className="text-green-700 font-heading font-semibold">
-                Your recording has been shared! It appears in the gallery below.
+                Saved on this device. It now appears in your list below.
               </p>
             </div>
           )}
 
           {/* Pending submissions notice */}
           {pendingCount > 0 && (
-            <p className="text-xs text-text-dark/40 text-center">
+            <p className="text-xs text-text-dark/70 text-center">
               {pendingCount} submission{pendingCount > 1 ? "s" : ""} pending review.
             </p>
           )}
@@ -344,9 +367,10 @@ export default function GalleryPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
                    {sub.shareLink ? (
-                     <a
+                      <a
                         href={"/watch?url=" + encodeURIComponent(sub.shareLink)}
                         className="absolute inset-0 flex items-center justify-center"
+                        aria-label={`Play ${sub.title}`}
                       >
                         <div className="w-12 h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
                           <svg className="w-5 h-5 text-text-dark ml-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -370,12 +394,18 @@ export default function GalleryPage() {
                       {sub.title}
                     </p>
                     <div className="flex items-center gap-1 mt-0.5">
-                      <span className="text-xs text-text-dark/40 truncate">{sub.submitterName}</span>
-                      <span className="text-xs text-text-dark/20">{" · "}</span>
-                      <span className="text-xs text-text-dark/40">{formatDate(sub.submittedAt)}</span>
+                      <span className="text-xs text-text-dark/70 truncate">
+                        {sub.id.startsWith("seed-") ? "Site example" : sub.submitterName}
+                      </span>
+                      {!sub.id.startsWith("seed-") && (
+                        <>
+                          <span className="text-xs text-text-dark/50">{" · "}</span>
+                          <span className="text-xs text-text-dark/70">{formatDate(sub.submittedAt)}</span>
+                        </>
+                      )}
                      {sub.shareLink && (
                        <>
-                         <span className="text-xs text-text-dark/20">{" · "}</span>
+                         <span className="text-xs text-text-dark/50">{" · "}</span>
                          <a
                             href={"/watch?url=" + encodeURIComponent(sub.shareLink)}
                             className="text-xs text-primary hover:underline font-heading font-semibold flex-shrink-0"
@@ -392,7 +422,7 @@ export default function GalleryPage() {
           ) : (
             <div className="text-center py-12">
               <p className="text-4xl mb-3">{'\uD83C\uDFB6'}</p>
-              <p className="text-text-dark/50 font-heading font-semibold">
+              <p className="text-text-dark/70 font-heading font-semibold">
                 No recordings yet. Be the first to share!
               </p>
             </div>

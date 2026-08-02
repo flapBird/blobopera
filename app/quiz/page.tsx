@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useEffect, useState } from "react";
 import SidebarLayout from "@/components/SidebarLayout";
 import SchemaMarkup from "@/components/SchemaMarkup";
 // ---------- types ----------
@@ -48,34 +48,34 @@ const QUESTIONS: Question[] = [
   {
     id: 1,
     category: "voice-types",
-    question: "Which voice type is the highest human vocal range?",
+    question: "Which represented voice type is highest in the Blob Opera quartet?",
     options: ["Bass", "Tenor", "Mezzo-Soprano", "Soprano"],
     correctIndex: 3,
-    explanation: "Soprano is the highest voice type, typically ranging from C4 to C6 — bright, agile, and capable of remarkable emotional expression.",
+    explanation: "Soprano is the highest of the four voice categories represented in Blob Opera.",
   },
   {
     id: 2,
     category: "voice-types",
-    question: "Which voice type typically ranges from C3 to C5 and often carries the lead melody in opera?",
+    question: "Which of these voice categories is normally higher than bass?",
     options: ["Bass", "Tenor", "Mezzo-Soprano", "Soprano"],
     correctIndex: 1,
-    explanation: "The tenor is the highest natural male voice (C3–C5), known for its brightness and power.",
+    explanation: "Tenor is generally the higher of these two male operatic voice categories. Individual singers' ranges vary.",
   },
   {
     id: 3,
     category: "voice-types",
-    question: "Which voice type provides the harmonic foundation in choral music, typically ranging from D2 to D4?",
+    question: "Which represented voice category occupies the lowest register?",
     options: ["Bass", "Tenor", "Mezzo-Soprano", "Soprano"],
     correctIndex: 0,
-    explanation: "The bass is the lowest human voice (D2–D4), with a rich, resonant quality that anchors the quartet's sound.",
+    explanation: "Bass occupies the lowest register of the four categories represented in the experiment.",
   },
   {
     id: 4,
     category: "voice-types",
-    question: "Which voice type sits between the male and female voices, with a range of A3 to A5?",
+    question: "Which represented category is lower than soprano?",
     options: ["Bass", "Tenor", "Mezzo-Soprano", "Soprano"],
     correctIndex: 2,
-    explanation: "The mezzo-soprano (A3–A5) is darker and richer than the soprano, creating connective tissue that makes four-part harmony feel complete.",
+    explanation: "Mezzo-soprano is the lower of the two female voice categories represented in Blob Opera.",
   },
   {
     id: 5,
@@ -89,7 +89,7 @@ const QUESTIONS: Question[] = [
   {
     id: 6,
     category: "music-theory",
-    question: "What is the term for the smooth glide between two pitches that Blob Opera's AI learned from real recordings?",
+    question: "What is the musical term for an audible, continuous glide between two pitches?",
     options: ["Legato", "Portamento", "Staccato", "Vibrato"],
     correctIndex: 1,
     explanation: "Portamento is the audible slide through intermediate pitches between two notes.",
@@ -97,18 +97,18 @@ const QUESTIONS: Question[] = [
   {
     id: 7,
     category: "music-theory",
-    question: "In four-part harmony, which principle says each voice should move as little as possible between successive chords?",
+    question: "What term describes how individual melodic lines move from one harmony to the next?",
     options: ["Counterpoint", "Voice Leading", "Cadence", "Resolution"],
     correctIndex: 1,
-    explanation: "Voice leading is the art of moving multiple voices from one chord to the next with minimal motion.",
+    explanation: "Voice leading describes how individual parts move between harmonies. Small motions are common, but not an absolute rule.",
   },
   {
     id: 8,
     category: "music-theory",
-    question: "What frequency ratio gives a major chord its 'happy' sound?",
-    options: ["3:2", "4:3", "5:4", "6:5"],
-    correctIndex: 2,
-    explanation: "A major third has a frequency ratio of 5:4, which sits comfortably in the harmonic series.",
+    question: "How many semitones are in an equal-tempered major third?",
+    options: ["Three", "Four", "Five", "Seven"],
+    correctIndex: 1,
+    explanation: "In twelve-tone equal temperament, a major third spans four semitones.",
   },
   {
     id: 9,
@@ -121,10 +121,10 @@ const QUESTIONS: Question[] = [
   {
     id: 10,
     category: "music-theory",
-    question: "In a typical four-part vocal arrangement, which voice traditionally moves in larger intervals than the upper voices?",
-    options: ["Soprano", "Tenor", "Alto", "Bass"],
-    correctIndex: 3,
-    explanation: "The bass traditionally moves in larger intervals, maintaining its role as the harmonic foundation.",
+    question: "What do musicians call two or more pitches heard at the same time?",
+    options: ["Harmony", "Tempo", "Timbre", "Meter"],
+    correctIndex: 0,
+    explanation: "Harmony is the relationship created when pitches sound together.",
   },
   // ---- Blob Opera ----
   {
@@ -133,7 +133,7 @@ const QUESTIONS: Question[] = [
     question: "How many hours of professional opera recordings were used to train Blob Opera's AI?",
     options: ["4 hours", "8 hours", "16 hours", "32 hours"],
     correctIndex: 2,
-    explanation: "Four professional opera singers each spent hours recording, resulting in roughly 16 hours of meticulously labeled audio data.",
+    explanation: "Google says the four professional opera singers recorded a combined 16 hours of singing.",
   },
   {
     id: 12,
@@ -146,10 +146,10 @@ const QUESTIONS: Question[] = [
   {
     id: 13,
     category: "blob-opera",
-    question: "When you drag a blob to the left, what happens to the vowel sound?",
-    options: ["It becomes brighter ('ah')", "It becomes rounder ('oo')", "The pitch goes up", "The pitch goes down"],
+    question: "Which movement changes a blob's pitch?",
+    options: ["Up and down", "A single click", "Opening the menu", "Changing the city"],
     correctIndex: 0,
-    explanation: "Dragging left shapes the vowel toward 'ah' — the sound opens up, becoming brighter and more operatic.",
+    explanation: "Google's guide says to drag a blob up and down to change pitch; the other direction changes the vowel sound.",
   },
   {
     id: 14,
@@ -162,10 +162,10 @@ const QUESTIONS: Question[] = [
   {
     id: 15,
     category: "blob-opera",
-    question: "What keeps the blobs sounding musical even when you make random movements?",
+    question: "What lets the other blobs respond and harmonize with your input?",
     options: ["Pre-recorded samples", "An AI harmony engine", "A live musician", "YouTube audio"],
     correctIndex: 1,
-    explanation: "The AI harmony engine monitors your input and computes harmonies for the other three voices in real time.",
+    explanation: "Google says a second machine-learning model lets the blobs respond to and harmonize your input in real time.",
   },
 ];
 
@@ -305,23 +305,25 @@ function IntervalQuiz() {
   const interval = INTERVALS[currentIdx];
   if (!interval) return null;
 
-  const playedRef = useRef(false);
-  if (!playedRef.current) {
-    playedRef.current = true;
-    setTimeout(() => playInterval(interval.semitones), 300);
-  }
+  useEffect(() => {
+    const timeout = window.setTimeout(() => playInterval(interval.semitones), 300);
+    return () => window.clearTimeout(timeout);
+  }, [interval.semitones]);
+
+  const optionRotation = (currentIdx * 2 + 1) % INTERVALS.length;
+  const allIntervals = INTERVALS.map(
+    (_, index) => INTERVALS[(index + optionRotation) % INTERVALS.length].name,
+  );
+  const correctIndex = allIntervals.indexOf(interval.name);
 
   const handleSelect = (idx: number) => {
     setSelected(idx);
     setRevealed(true);
-    if (idx === 0) setScore((s) => s + 1);
+    if (idx === correctIndex) setScore((s) => s + 1);
   };
-
-  const allIntervals = INTERVALS.map((i) => i.name);
 
   const handleNext = () => {
     if (currentIdx < INTERVALS.length - 1) {
-      playedRef.current = false;
       setCurrentIdx((i) => i + 1);
       setSelected(null);
       setRevealed(false);
@@ -331,7 +333,6 @@ function IntervalQuiz() {
   };
 
   const handlePlayAgain = () => {
-    playedRef.current = false;
     setCurrentIdx(0);
     setSelected(null);
     setRevealed(false);
@@ -361,7 +362,7 @@ function IntervalQuiz() {
     <div className="bg-white rounded-2xl border border-gray-100 p-6 sm:p-8 shadow-sm animate-fade-up">
       <p className="text-sm text-primary font-heading font-semibold mb-2">{'\uD83D\uDC42'} Interval Ear Training</p>
       <div className="flex items-center justify-between mb-4">
-        <span className="text-xs text-text-dark/50 font-medium">
+        <span className="text-xs text-text-dark/70 font-medium">
           {currentIdx + 1} / {INTERVALS.length}
         </span>
         <ProgressBar current={currentIdx} total={INTERVALS.length} />
@@ -381,9 +382,9 @@ function IntervalQuiz() {
       <div className="space-y-3">
         {allIntervals.map((name, idx) => {
           let btnStyle = "border-gray-200 bg-white hover:bg-gray-50 text-text-dark";
-          if (revealed && idx === 0) {
+          if (revealed && idx === correctIndex) {
             btnStyle = "border-green-500 bg-green-50 text-green-800";
-          } else if (revealed && idx === selected && idx !== 0) {
+          } else if (revealed && idx === selected && idx !== correctIndex) {
             btnStyle = "border-red-400 bg-red-50 text-red-700";
           } else if (selected === idx && !revealed) {
             btnStyle = "border-primary bg-primary/5 text-primary";
@@ -435,7 +436,7 @@ function QuizResults({
     color = "text-blue-700";
   } else {
     grade = "Beginner";
-    color = "text-text-dark/60";
+    color = "text-text-dark/70";
   }
 
   return (
@@ -528,7 +529,7 @@ export default function QuizPage() {
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-text-dark mb-3">
           Music Theory Quiz
         </h1>
-        <p className="text-text-dark/60 max-w-3xl mx-auto text-sm leading-relaxed">
+        <p className="text-text-dark/80 max-w-3xl mx-auto text-sm leading-relaxed">
           Our quizzes cover the four vocal ranges and their roles in choral harmony, the music theory behind intervals and chord voicings, and the AI technology that powers Blob Opera. Each quiz has five questions with immediate feedback, and the interval ear training section uses the Web Audio API to generate live tones for practical aural skills practice. All quizzes include explanations for each answer and a personalised rating at the end.
         </p>
       </section>
@@ -539,7 +540,7 @@ export default function QuizPage() {
           <div className="space-y-6">
             {/* Knowledge quizzes */}
             <h2 className="font-heading font-bold text-xl text-text-dark">Knowledge Quizzes</h2>
-            <p className="text-sm text-text-dark/50 leading-relaxed mb-1">
+            <p className="text-sm text-text-dark/70 leading-relaxed mb-1">
               Voice Type Challenge covers the four main vocal ranges from bass to soprano. Harmony &amp; Theory tests intervals, chords, and voice leading. Blob Opera Facts quizzes your knowledge of the AI and game mechanics.
             </p>
             <div className="grid gap-4 sm:grid-cols-3">
@@ -553,14 +554,14 @@ export default function QuizPage() {
                   <h3 className="font-heading font-bold text-base text-text-dark group-hover:text-primary transition-colors mb-1">
                     {meta.label}
                   </h3>
-                  <p className="text-sm text-text-dark/60 leading-relaxed">{meta.description}</p>
+                  <p className="text-sm text-text-dark/70 leading-relaxed">{meta.description}</p>
                 </button>
               ))}
             </div>
 
             {/* Interval ear training */}
             <h2 className="font-heading font-bold text-xl text-text-dark pt-4">Ear Training</h2>
-            <p className="text-sm text-text-dark/50 leading-relaxed mb-1">
+            <p className="text-sm text-text-dark/70 leading-relaxed mb-1">
               Practice identifying musical intervals with pairs of tones generated live by the Web Audio API. Work through six common intervals from minor thirds to octaves and train your aural skills.
             </p>
             <button
@@ -571,7 +572,7 @@ export default function QuizPage() {
               <h3 className="font-heading font-bold text-base text-text-dark group-hover:text-primary transition-colors mb-1">
                 Interval Ear Training
               </h3>
-              <p className="text-sm text-text-dark/60 leading-relaxed">
+              <p className="text-sm text-text-dark/70 leading-relaxed">
                 Listen to pairs of tones generated with Web Audio and identify the interval. Practice recognizing major thirds, perfect fifths, and more.
               </p>
             </button>
@@ -599,7 +600,7 @@ export default function QuizPage() {
               >
                 &larr; All Quizzes
               </button>
-              <span className="text-xs text-text-dark/50 font-medium">
+              <span className="text-xs text-text-dark/70 font-medium">
                 Score: {score}/{currentQ + (revealed && selected === question.correctIndex ? 1 : 0)}
               </span>
             </div>

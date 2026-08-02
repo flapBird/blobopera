@@ -15,7 +15,7 @@ export default function LegalPage({ title, children }: LegalPageProps) {
         <h1 className="font-heading font-extrabold text-3xl sm:text-4xl text-text-dark mb-2">
           {title}
         </h1>
-        <p className="text-sm text-text-dark/50 mb-8">
+        <p className="text-sm text-text-dark/70 mb-8">
           Last updated: {siteConfig.legal.lastUpdated}
         </p>
         <div className="space-y-4 text-text-dark/80 leading-relaxed">

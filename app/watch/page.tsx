@@ -2,17 +2,21 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { Suspense } from "react";
+import { getSafeBlobOperaRecordingUrl } from "@/lib/blob-opera-url";
 
 function WatchPlayer() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const url = searchParams.get("url");
+  const rawUrl = searchParams.get("url");
+  const url = getSafeBlobOperaRecordingUrl(rawUrl);
 
-  if (!url) {
+  if (!rawUrl || !url) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-16 text-center">
-        <p className="text-text-dark/50 font-heading font-semibold mb-4">
-          No recording URL provided.
+        <p className="text-text-dark/70 font-heading font-semibold mb-4">
+          {!rawUrl
+            ? "No recording URL provided."
+            : "This is not a valid Blob Opera recording link."}
         </p>
         <button
           onClick={() => router.back()}
@@ -47,6 +51,7 @@ function WatchPlayer() {
             className="w-full h-full"
             allow="autoplay; fullscreen; clipboard-write"
             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            title="Blob Opera recording playback"
           />
         </div>
       </div>
