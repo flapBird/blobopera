@@ -4,6 +4,7 @@ import SidebarLayout from "@/components/SidebarLayout";
 import SchemaMarkup from "@/components/SchemaMarkup";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import ArticleCard from "@/components/ArticleCard";
+import AdsterraNative from "@/components/AdsterraNative";
 import { buildMetadata, buildVideoGameJsonLd } from "@/lib/seo";
 import { getAllArticleMetas } from "@/lib/articles";
 import { siteConfig } from "@/lib/site.config";
@@ -273,6 +274,7 @@ export default function HomePage() {
                   caption="The Google-hosted experiment includes controls for recording and replay."
                 />
               )}
+              {index === 4 && <AdsterraNative className="mt-8" />}
             </section>
           ))}
         </article>

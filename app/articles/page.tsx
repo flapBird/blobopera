@@ -1,6 +1,7 @@
 import { buildMetadata } from "@/lib/seo";
 import { getAllArticleMetas, getCategoryLabel, categoryOrder } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
+import AdsterraNative from "@/components/AdsterraNative";
 
 export const metadata = buildMetadata({
   title: "Articles",
@@ -37,6 +38,8 @@ export default function ArticlesPage() {
       <p className="text-text-dark/70 mb-10 max-w-2xl">
         Read and learn about music, technology, and creativity.
       </p>
+
+      <AdsterraNative className="mb-10" />
 
       {grouped.map((group) => (
         <section key={group.category} className="mb-12">

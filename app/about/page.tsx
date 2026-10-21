@@ -1,5 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site.config";
+import AdsterraNative from "@/components/AdsterraNative";
 
 export const metadata = buildMetadata({
   title: "About",
@@ -55,6 +56,8 @@ export default function AboutPage() {
           on Google Arts & Culture to learn more about the project.
         </p>
       </div>
+
+      <AdsterraNative className="mt-10" />
     </div>
   );
 }

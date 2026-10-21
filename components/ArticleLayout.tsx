@@ -1,6 +1,7 @@
 import { getCategoryLabel } from "@/lib/articles";
 import type { ArticleMeta } from "@/lib/articles";
 import Link from "next/link";
+import AdsterraNative from "./AdsterraNative";
 
 interface ArticleLayoutProps {
   article: ArticleMeta;
@@ -52,6 +53,8 @@ export default function ArticleLayout({
           {children}
         </div>
       </article>
+
+      <AdsterraNative className="my-12" />
 
       <aside className="mt-12 rounded-2xl border border-secondary/30 bg-secondary/10 p-5">
         <h2 className="font-heading font-bold text-lg text-text-dark">

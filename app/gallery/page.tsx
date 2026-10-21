@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import SidebarLayout from "@/components/SidebarLayout";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import AdsterraNative from "@/components/AdsterraNative";
 import { siteConfig } from "@/lib/site.config";
 import { getSafeBlobOperaRecordingUrl } from "@/lib/blob-opera-url";
 
@@ -346,6 +347,8 @@ export default function GalleryPage() {
               {pendingCount} submission{pendingCount > 1 ? "s" : ""} pending review.
             </p>
           )}
+
+          <AdsterraNative />
 
           {/* Gallery grid */}
           {approvedSubmissions.length > 0 ? (

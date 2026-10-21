@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef } from "react";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import AdsterraNative from "@/components/AdsterraNative";
 
 
 // ---------- music theory constants ----------
@@ -430,6 +431,8 @@ export default function ChordBuilderPage() {
             </div>
           </div>
         </div>
+
+        <AdsterraNative className="mt-8" />
       </div>
     </>
   );

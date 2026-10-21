@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import SidebarLayout from "@/components/SidebarLayout";
 import SchemaMarkup from "@/components/SchemaMarkup";
+import AdsterraNative from "@/components/AdsterraNative";
 // ---------- types ----------
 type QuizCategory = "voice-types" | "music-theory" | "blob-opera";
 
@@ -622,6 +623,8 @@ export default function QuizPage() {
         {activeCategory && done && (
           <QuizResults score={score} total={totalQuestions} onRestart={handleRestart} />
         )}
+
+        <AdsterraNative className="mt-10" />
       </SidebarLayout>
     </>
   );

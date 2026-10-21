@@ -1,4 +1,5 @@
 import EmailLink from "@/components/EmailLink";
+import AdsterraNative from "@/components/AdsterraNative";
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site.config";
 
@@ -59,6 +60,8 @@ export default function ContactPage() {
           quickly. For bug reports, mention your browser and device type.
         </p>
       </div>
+
+      <AdsterraNative className="mt-10" />
     </div>
   );
 }
