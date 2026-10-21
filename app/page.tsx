@@ -6,7 +6,7 @@ import ImagePlaceholder from "@/components/ImagePlaceholder";
 import ArticleCard from "@/components/ArticleCard";
 import AdsterraNative from "@/components/AdsterraNative";
 import { buildMetadata, buildVideoGameJsonLd } from "@/lib/seo";
-import { getAllArticleMetas } from "@/lib/articles";
+import { getFeaturedGuides } from "@/lib/articles";
 import { siteConfig } from "@/lib/site.config";
 
 export const metadata = buildMetadata({ path: "/", includeCanonical: false });
@@ -31,7 +31,15 @@ const GUIDE_SECTIONS = [
         controls by experimenting, while a musician can listen more closely to
         pitch, vocal range, vowel color, and harmony. This page embeds the
         original Google-hosted experiment; the surrounding guide and learning
-        tools are provided by this independent fan site.
+        tools are provided by this independent fan site. If this is your first
+        visit, the{" "}
+        <Link
+          href="/articles/how-to-play-blob-opera"
+          className="font-semibold text-primary underline underline-offset-4"
+        >
+          step-by-step guide to playing Blob Opera
+        </Link>{" "}
+        covers the controls and a first performance.
       </>
     ),
   },
@@ -67,7 +75,14 @@ const GUIDE_SECTIONS = [
         another coordinates the ensemble. Claims about a particular neural
         vocoder, training annotation system, model size, or browser inference
         framework are not included here because Google&apos;s published
-        materials do not specify them.
+        materials do not specify them.{" "}
+        <Link
+          href="/articles/how-blob-opera-works"
+          className="font-semibold text-primary underline underline-offset-4"
+        >
+          Read the full explanation of how Blob Opera works
+        </Link>
+        .
       </>
     ),
   },
@@ -101,7 +116,14 @@ const GUIDE_SECTIONS = [
         foundation, then notice how the middle voices fill the space and how
         the soprano adds the upper line. Actual singers have individual ranges
         and timbres, so the blobs should be treated as a playful introduction
-        rather than a complete lesson in professional voice classification.
+        rather than a complete lesson in professional voice classification. The{" "}
+        <Link
+          href="/articles/what-are-the-four-voice-types"
+          className="font-semibold text-primary underline underline-offset-4"
+        >
+          guide to the four Blob Opera voice types
+        </Link>{" "}
+        explains the approximate ranges and includes a short listening exercise.
       </>
     ),
   },
@@ -136,7 +158,14 @@ const GUIDE_SECTIONS = [
         plan a beginning, a contrasting middle, and an ending. Keep the first
         attempt short, listen back, and make a second version with one clear
         change. That simple cycle is a useful introduction to musical
-        composition and revision.
+        composition and revision. The{" "}
+        <Link
+          href="/articles/recording-guide"
+          className="font-semibold text-primary underline underline-offset-4"
+        >
+          complete recording and sharing guide
+        </Link>{" "}
+        covers planning, re-recording, and what to do when a link fails.
       </>
     ),
   },
@@ -152,7 +181,14 @@ const GUIDE_SECTIONS = [
         and “La Bamba.” These presets demonstrate what the voices can do, but
         free play remains the central attraction. Features and available
         locations may change as Google updates the hosted experiment, so this
-        site does not promise a fixed list of cities or songs.
+        site does not promise a fixed list of cities or songs. The{" "}
+        <Link
+          href="/articles/city-themes-preset-songs"
+          className="font-semibold text-primary underline underline-offset-4"
+        >
+          guide to Blob Opera songs and world-tour cities
+        </Link>{" "}
+        separates documented details from interface-dependent ones.
       </>
     ),
   },
@@ -169,7 +205,15 @@ const GUIDE_SECTIONS = [
         uses modern web-audio technology and may not perform optimally on older
         devices. If playback is uneven, close other audio-heavy tabs, use a
         current browser, or open the official experiment directly. Headphones
-        can make the individual parts easier to distinguish.
+        can make the individual parts easier to distinguish. If the page will
+        not load or produce sound, the{" "}
+        <Link
+          href="/articles/blob-opera-not-working"
+          className="font-semibold text-primary underline underline-offset-4"
+        >
+          troubleshooting guide
+        </Link>{" "}
+        walks through the browser, audio, and network checks in order.
       </>
     ),
   },
@@ -199,12 +243,7 @@ const FAQ_ITEMS = [
 ];
 
 export default function HomePage() {
-  const latestArticles = [...getAllArticleMetas()]
-    .sort(
-      (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
-    )
-    .slice(0, 4);
+  const featuredGuides = getFeaturedGuides();
 
   return (
     <>
@@ -308,9 +347,9 @@ export default function HomePage() {
         <section className="mt-16">
           <div className="flex items-end justify-between gap-4 mb-6">
             <div>
-              <p className="text-sm font-semibold text-primary">Keep learning</p>
+              <p className="text-sm font-semibold text-primary">Start here</p>
               <h2 className="font-heading font-bold text-2xl text-text-dark">
-                Latest articles
+                Blob Opera guides
               </h2>
             </div>
             <Link href="/articles" className="text-sm text-primary font-semibold underline">
@@ -318,7 +357,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            {latestArticles.map((article) => (
+            {featuredGuides.map((article) => (
               <ArticleCard key={article.slug} article={article} />
             ))}
           </div>

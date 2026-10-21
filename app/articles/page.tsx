@@ -1,5 +1,10 @@
 import { buildMetadata } from "@/lib/seo";
-import { getAllArticleMetas, getCategoryLabel, categoryOrder } from "@/lib/articles";
+import {
+  getAllArticleMetas,
+  getCategoryLabel,
+  getFeaturedGuides,
+  categoryOrder,
+} from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
 import AdsterraNative from "@/components/AdsterraNative";
 
@@ -11,13 +16,17 @@ export const metadata = buildMetadata({
 
 export default function ArticlesPage() {
   const metas = getAllArticleMetas();
+  const featured = getFeaturedGuides();
+  const featuredSlugs = new Set(featured.map((article) => article.slug));
 
   // Group by category in order
   const grouped = categoryOrder
     .map((cat) => ({
       category: cat,
       label: getCategoryLabel(cat),
-      articles: metas.filter((a) => a.category === cat),
+      articles: metas.filter(
+        (a) => a.category === cat && !featuredSlugs.has(a.slug),
+      ),
     }))
     .filter((g) => g.articles.length > 0);
 
@@ -41,18 +50,39 @@ export default function ArticlesPage() {
 
       <AdsterraNative className="mb-10" />
 
-      {grouped.map((group) => (
-        <section key={group.category} className="mb-12">
-          <h2 className="font-heading font-bold text-xl text-text-dark mb-5">
-            {group.label}
-          </h2>
-          <div className="grid gap-5 sm:grid-cols-2">
-            {group.articles.map((article) => (
-              <ArticleCard key={article.slug} article={article} />
-            ))}
-          </div>
-        </section>
-      ))}
+      <section className="mb-14">
+        <p className="text-sm font-semibold text-primary">Start here</p>
+        <h2 className="font-heading font-bold text-2xl text-text-dark mb-2">
+          Blob Opera guides
+        </h2>
+        <p className="text-text-dark/70 mb-6 max-w-2xl">
+          Eight in-depth guides to playing, understanding, recording,
+          troubleshooting, and teaching the experiment.
+        </p>
+        <div className="grid gap-5 sm:grid-cols-2">
+          {featured.map((article) => (
+            <ArticleCard key={article.slug} article={article} />
+          ))}
+        </div>
+      </section>
+
+      <div className="border-t border-stone-200 pt-10">
+        <h2 className="font-heading font-bold text-2xl text-text-dark mb-8">
+          Browse by topic
+        </h2>
+        {grouped.map((group) => (
+          <section key={group.category} className="mb-12">
+            <h3 className="font-heading font-bold text-xl text-text-dark mb-5">
+              {group.label}
+            </h3>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {group.articles.map((article) => (
+                <ArticleCard key={article.slug} article={article} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
     </div>
   );
 }

@@ -17,11 +17,14 @@ Important: This website is not an official Google product and is not affiliated 
 - Introductory lessons on harmony, melody, vibrato, vowels, portamento, dynamics, opera, and AI-assisted music.
 - Interactive quizzes and a Web Audio chord builder.
 - Recording and sharing workflows supported by the original experiment.
+- Troubleshooting for loading, audio, embed, and recording-link problems.
+- A classroom lesson plan and practical guidance for teachers.
 
 ## Key pages
 
 - [Play Blob Opera and read the complete beginner's guide](https://blobopera.xyz/): The main page embeds the original Google-hosted experiment and explains its creators, singers, controls, machine-learning overview, voice types, recording features, and world-tour themes.
-- [All articles](https://blobopera.xyz/articles): Browse educational material by AI and music technology, music education, guides and tutorials, and music appreciation.
+- [How to Play Blob Opera](https://blobopera.xyz/articles/how-to-play-blob-opera): A step-by-step tutorial covering the four blobs, pitch and vowel controls, a first performance, common beginner mistakes, and a five-minute practice plan.
+- [All articles](https://blobopera.xyz/articles): Browse 12 in-depth articles on AI and music technology, music education, guides and tutorials, and music appreciation.
 - [Music theory quiz](https://blobopera.xyz/quiz): Interactive questions about voice types, harmony, intervals, and Blob Opera facts, with immediate explanations.
 - [Chord builder](https://blobopera.xyz/tools/chord-builder): Select notes on a three-octave keyboard, hear them through the Web Audio API, and identify common chord types.
 - [Saved recordings](https://blobopera.xyz/gallery): Save validated Blob Opera recording links locally in the current browser. Entries are stored on that device and are not public community submissions.
@@ -30,36 +33,27 @@ Important: This website is not an official Google product and is not affiliated 
 
 ## AI and music technology articles
 
-- [How AI Learns to Sing: From Opera Recordings to AI Voice](https://blobopera.xyz/articles/how-ai-learns-to-sing): A careful overview of the training recordings, model-generated singing, and limits of the publicly disclosed technical information.
-- [Real-Time Vocal Synthesis in a Browser: What We Know](https://blobopera.xyz/articles/real-time-vocal-synthesis): What Google publicly confirms about the responsive browser experience, without assigning undocumented technology to it.
-- [The 16 Hours of Singing Behind Blob Opera](https://blobopera.xyz/articles/from-recordings-to-ai-voice): The four credited opera singers, recording sessions, and available details about the source material.
-- [The Harmony Engine: How AI Creates Four-Part Harmony in Real Time](https://blobopera.xyz/articles/the-harmony-engine): The second model that lets the other voices respond to and harmonize with the user's input.
-- [Neural Vocoders Explained: How AI Generates Audio](https://blobopera.xyz/articles/neural-vocoders-explained): A general introduction to neural audio generation; it should not be read as a claim that Blob Opera uses a particular undocumented vocoder.
-- [When AI Helps You Create: Collaboration vs Automation in Music](https://blobopera.xyz/articles/ai-collaboration-vs-automation): Blob Opera as a case study in interactive, AI-assisted creative work.
+- [How Does Blob Opera Work? Machine Learning, Voices, and Harmony](https://blobopera.xyz/articles/how-blob-opera-works): How the singing and harmony models fit together, the 16 hours of source recordings, the four credited singers, and which technical details remain undisclosed.
+- [Blob Opera and AI: Collaboration, Authorship, and Creative Agency](https://blobopera.xyz/articles/ai-collaboration-vs-automation): Interactive AI-assisted creativity, human authorship, and why Blob Opera is not simply automated composition.
 
 ## Music education articles
 
-- [What Are the Four Voice Types?](https://blobopera.xyz/articles/what-are-the-four-voice-types): Bass, tenor, mezzo-soprano, and soprano ranges, characteristics, and ensemble roles.
-- [Understanding Harmony Through Play](https://blobopera.xyz/articles/understanding-harmony-through-play): Consonance, dissonance, chords, and learning harmony by listening and experimenting.
-- [What Is Vibrato?](https://blobopera.xyz/articles/what-is-vibrato): The acoustic and expressive role of regular pitch oscillation in singing.
-- [Vowel Shapes in Singing](https://blobopera.xyz/articles/vowel-shapes-ah-vs-oo): How vocal-tract shape, resonance, and formants make vowels sound different.
-- [What Is Portamento?](https://blobopera.xyz/articles/what-is-portamento): The smooth glide between pitches and its expressive role in vocal music.
-- [Dynamic Range in Singing](https://blobopera.xyz/articles/dynamic-range-in-singing): Loudness, dynamics, and emotional contrast in vocal performance.
+- [Blob Opera Voice Types: Bass, Tenor, Mezzo-Soprano, and Soprano](https://blobopera.xyz/articles/what-are-the-four-voice-types): The four represented voice types, approximate ranges, ensemble roles, voices the quartet omits, and a listening exercise.
+- [Blob Opera in the Classroom: Lesson Plans and Music Games](https://blobopera.xyz/articles/5-music-games-for-classroom): A 40-minute lesson plan, learning objectives, assessment ideas, classroom privacy notes, and additional free music games for teachers.
+- [Vocal Expression in Blob Opera: Vowels, Vibrato, Portamento, and Dynamics](https://blobopera.xyz/articles/vocal-expression-in-blob-opera): How gestures shape vowel color and pitch movement, with clear separation between general vocal technique and documented Blob Opera behavior.
 
 ## Guides and tutorials
 
-- [Five Interactive Music Games for the Classroom](https://blobopera.xyz/articles/5-music-games-for-classroom): Lesson ideas for music teachers and home educators.
-- [How to Record and Share Blob Opera Performances](https://blobopera.xyz/articles/recording-guide): The original experiment's recording workflow and practical creative techniques.
-- [Blob Opera City Themes and Preset Songs](https://blobopera.xyz/articles/city-themes-preset-songs): A sourced overview of holiday songs and later world-tour locations; availability may change on the Google-hosted experiment.
-- [Tips for Creating Beautiful Melodies](https://blobopera.xyz/articles/tips-for-beautiful-melodies): Melodic contour, repetition, dynamics, range, phrasing, and revision.
+- [How to Play Blob Opera: Controls, Tips, and First Performance](https://blobopera.xyz/articles/how-to-play-blob-opera): A beginner tutorial for opening the experiment, understanding the four blobs, shaping a first melody, recording a take, and practicing in short sessions.
+- [How to Record and Share Blob Opera Performances](https://blobopera.xyz/articles/recording-guide): Planning a take, using the built-in recorder, reviewing and re-recording, sharing links, and troubleshooting playback problems.
+- [Blob Opera Songs and World Tour Cities](https://blobopera.xyz/articles/city-themes-preset-songs): Sourced details about holiday presets, 'Frère Jacques,' 'La Bamba,' and the world-tour locations, with clear caveats about interface changes.
+- [Blob Opera Not Working? A Practical Troubleshooting Guide](https://blobopera.xyz/articles/blob-opera-not-working): An ordered checklist for loading, audio, unresponsive controls, slow performance, embed problems, and broken recording links.
+- [Harmony and Melody in Blob Opera: A Practical Guide](https://blobopera.xyz/articles/harmony-and-melody-in-blob-opera): Building chord progressions, shaping melodic contour, coordinating the four voices, and practicing by ear.
 
 ## Music appreciation articles
 
-- [What Is Opera?](https://blobopera.xyz/articles/what-is-opera): A beginner-friendly introduction to the art form, its voices, staging, and continuing evolution.
-- [Opera History in Five Minutes](https://blobopera.xyz/articles/opera-history-in-5-minutes): A short history from late Renaissance Florence to contemporary digital experiments.
-- [Why Blob Opera Is Genius](https://blobopera.xyz/articles/why-blob-opera-is-genius): An analysis of approachable interaction, playful design, and musical accessibility.
-- [Algorithmic Composition: A History](https://blobopera.xyz/articles/history-of-algorithmic-composition): Rule-based and computer-assisted music from historical precedents to modern AI tools.
-- [The Psychology of Musical Preference](https://blobopera.xyz/articles/psychology-of-musical-preference): Familiarity, expectation, memory, identity, and culture in musical taste.
+- [What Is Opera? A Beginner's Guide and Short History](https://blobopera.xyz/articles/what-is-opera): An introduction to the art form, its voices and staging, plus a short history from late Renaissance Florence to contemporary digital experiments.
+- [Why Blob Opera Is Genius: Design, Play, and Musical Accessibility](https://blobopera.xyz/articles/why-blob-opera-is-genius): An analysis of approachable interaction, playful design, musical accessibility, and how familiarity shapes listening.
 
 ## Interpretation and citation guidance
 

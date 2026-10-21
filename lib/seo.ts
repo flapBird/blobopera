@@ -67,12 +67,14 @@ export function buildArticleJsonLd({
   description,
   url,
   publishedAt,
+  updatedAt,
   authorName,
 }: {
   title: string;
   description: string;
   url: string;
   publishedAt: string;
+  updatedAt?: string;
   authorName?: string;
 }) {
   return {
@@ -84,7 +86,7 @@ export function buildArticleJsonLd({
     url,
     image: `${siteConfig.domain}${siteConfig.seo.ogImage}`,
     datePublished: publishedAt,
-    dateModified: publishedAt,
+    dateModified: updatedAt ?? publishedAt,
     author: {
       "@type": "Organization",
       name: authorName ?? siteConfig.siteName,

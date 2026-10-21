@@ -11,16 +11,16 @@ An independent fan site for Blob Opera, the AI-powered singing experiment by Dav
 ## Features
 
 
-### Educational Articles (21 articles)
+### Educational Articles (12 articles)
 
-Four categories covering different aspects of vocal music and AI technology:
+Eight featured guides plus four supporting articles, grouped into four categories:
 
 | Category | Focus |
 |---|---|
-| **AI & Music Technology** | How neural vocoders work, real-time vocal synthesis, the harmony engine, training datasets |
-| **Music Education** | Voice types (bass / tenor / mezzo / soprano), vibrato, portamento, vowel shaping, dynamic range |
-| **Music Appreciation** | Algorithmic composition history, psychology of musical preference, why Blob Opera works |
-| **Guides & Tutorials** | Tips for creating melodies, using Blob Opera in the classroom |
+| **AI & Music Technology** | How the singing and harmony models work, AI collaboration and authorship |
+| **Music Education** | Voice types, classroom lessons, vocal expression (vowels, vibrato, portamento, dynamics) |
+| **Music Appreciation** | Opera history and appreciation, why Blob Opera works, musical accessibility |
+| **Guides & Tutorials** | Playing, recording and sharing, troubleshooting, world-tour songs, harmony and melody |
 
 Each article has unique meta descriptions, keywords, related article links, and JSON-LD structured data.
 
@@ -62,7 +62,7 @@ Clicking a recording card opens an in-site playback page (`/watch?url=...`) that
 - **Audio:** Web Audio API (oscillator synthesis, gain envelopes)
 - **Fonts:** Nunito (headings), Quicksand (body) via Google Fonts
 - **Analytics:** Google Analytics 4 (optional, via env var)
-- **Ads:** Google AdSense (optional, disabled by default)
+- **Ads:** Adsterra native units (client component with route-aware re-injection)
 - **Deployment:** Vercel (static export compatible)
 
 ---
@@ -72,7 +72,7 @@ Clicking a recording card opens an in-site playback page (`/watch?url=...`) that
 ```
 app/
 ├── about/              # About page
-├── articles/           # Article pages (23 articles, SSR)
+├── articles/           # Article pages (12 articles, SSG)
 │   ├── [slug]/         # Dynamic article route
 │   └── page.tsx        # Article listing page
 ├── contact/            # Contact page
@@ -102,6 +102,7 @@ components/
 ├── Hero.tsx            # Homepage hero with game embed wrapper
 ├── SchemaMarkup.tsx    # JSON-LD structured data injector
 ├── AdSlot.tsx          # AdSense placement slots (placeholder)
+├── AdsterraNative.tsx  # Adsterra native unit, re-injected on client navigation
 ├── EmailLink.tsx       # Email display component (plain text)
 └── VideoPlaceholder.tsx
     ImagePlaceholder.tsx
@@ -162,14 +163,16 @@ All site-wide settings are centralised here:
 
 ## Content
 
-The 21 articles live in `lib/articles.ts` as structured data. Each article has:
+The 12 articles live in `lib/articles.ts` as structured data. Each article has:
 
 - A unique slug, title, and description
 - A category (`ai-music`, `music-education`, `guides`, `music-appreciation`)
-- Reading time estimate and publish date
+- Reading time estimate, publish date, and optional update date
 - Keywords for SEO
 - Related article slugs for cross-linking
 - One or more sections with headings, body text, and optional list items
+
+Eight Blob Opera-specific pillar guides are surfaced through `getFeaturedGuides()` on the homepage and the article index. URLs retired during content consolidation are permanently redirected in `next.config.js`.
 
 ---
 

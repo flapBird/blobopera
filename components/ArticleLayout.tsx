@@ -43,7 +43,11 @@ export default function ArticleLayout({
           {article.title}
         </h1>
         <p className="text-text-dark/70 text-sm">
-          Published {article.publishedAt} · Reviewed against the sources below
+          Published {article.publishedAt}
+          {article.updatedAt && article.updatedAt !== article.publishedAt
+            ? ` · Updated ${article.updatedAt}`
+            : ""}
+          {" · "}Reviewed against the sources below
         </p>
       </header>
 

@@ -34,6 +34,9 @@ export function generateMetadata({ params }: Props): Metadata {
       images: [{ url: siteConfig.seo.ogImage, width: 1200, height: 630 }],
       type: "article",
       publishedTime: article.meta.publishedAt,
+      ...(article.meta.updatedAt
+        ? { modifiedTime: article.meta.updatedAt }
+        : {}),
     },
     twitter: {
       card: "summary_large_image",
@@ -58,6 +61,7 @@ export default function ArticlePage({ params }: Props) {
     description: article.meta.description,
     url: `${siteConfig.domain}/articles/${article.meta.slug}`,
     publishedAt: article.meta.publishedAt,
+    updatedAt: article.meta.updatedAt,
   });
 
   return (
