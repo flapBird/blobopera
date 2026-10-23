@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site.config";
 
 export const metadata = buildMetadata({
-  title: "Contact",
+  title: "Contact Us: Questions, Feedback & Site Support",
   description: "Contact the independent Blob Opera website. Send feedback, report issues, or inquire about partnerships.",
   path: "/contact",
 });

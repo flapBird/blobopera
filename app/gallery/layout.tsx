@@ -1,7 +1,7 @@
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Your Recording Links",
+  title: "Blob Opera Recording Gallery & Share Links",
   description:
     "Save and replay valid Blob Opera recording links locally in your browser. Nothing is uploaded or publicly submitted.",
   path: "/gallery",

@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site.config";
 import LegalPage from "@/components/LegalPage";
 
 export const metadata = buildMetadata({
-  title: "Terms & Conditions",
+  title: "Terms & Conditions: Rules for Using This Site",
   description: "Terms and conditions for using Blob Opera — read about acceptable use, intellectual property, and liability when playing free online music games.",
   path: "/terms",
 });

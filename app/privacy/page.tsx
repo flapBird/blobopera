@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site.config";
 import LegalPage from "@/components/LegalPage";
 
 export const metadata = buildMetadata({
-  title: "Privacy Policy",
+  title: "Privacy Policy: Data, Cookies & Your Choices",
   description: "Blob Opera privacy policy — learn how we handle your data, cookies, advertising, and third-party services when you play free online music games on our site.",
   path: "/privacy",
 });

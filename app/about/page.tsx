@@ -3,7 +3,7 @@ import { siteConfig } from "@/lib/site.config";
 import AdsterraNative from "@/components/AdsterraNative";
 
 export const metadata = buildMetadata({
-  title: "About",
+  title: "About Blob Opera: Free Online Music Experiment",
   description: "Learn about Blob Opera — the free online music experiment by David Li and Google Arts & Culture. This independent site is not affiliated with Google.",
   path: "/about",
 });

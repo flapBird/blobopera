@@ -9,7 +9,7 @@ import ArticleCard from "@/components/ArticleCard";
 import AdsterraNative from "@/components/AdsterraNative";
 
 export const metadata = buildMetadata({
-  title: "Articles",
+  title: "Guides & Articles: Singing, Harmony & Music",
   description: "Read articles about AI music, music education, guides, and opera appreciation.",
   path: "/articles",
 });
